@@ -1,10 +1,13 @@
 $(function() {
 
+
     
+    var dd = $(".weekNames");
+    console.log(dd);
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     //            SUPPORT OBJECTS AND VARIABLES
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-    
+
 
     // the number of days per month
     var monthsAndDays = {
@@ -33,28 +36,28 @@ $(function() {
         Saturday: 6, 
         Sunday: 7
     }
-    
-    
+
+
     var firstDayOfMnthPosition = 0;
     var positionOfCurrentDay = 0;
     var numberOfDays = 0;
 
-    
-    
+
+
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     //                     FUNCTIONS
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-    
-    
+
+
     // searching the position of the first day of a current month
     function beginingOfMonth (currentDay, currentDayName) {
         $.each(daysNames, function(key, value) { 
             if (key == currentDayName) {
                 positionOfCurrentDay = value;
             }
-            });
-        
+        });
+
         var supportValue = positionOfCurrentDay - (currentDay - 1);
 
         if (positionOfCurrentDay < currentDay) {
@@ -89,10 +92,10 @@ $(function() {
         // putting month name and the year to the calendar table
         $(".mthsName").text(currentMonth + " " + currentYear);
 
-        var calendarTable = $(".mnthTable");
+        var calendarTable = $(".calendarBox");
         var dayOfMnth = 1;
 
-
+        /*
         for (var i = 1; i <= 6; i++) {
             // creating weeks and putting them into the calendar
             var newWeek = $("<tr></tr>");
@@ -103,13 +106,13 @@ $(function() {
                 // creating table cells and putting them into the calendar
                 var tableCell = $("<td></td>");
                 newWeek.append(tableCell);
-                
-                
+
+
                 //painting the current day cell
                 if (dayOfMnth == currentDay) {
                     tableCell.addClass("today");
                 }
-                
+
 
                 // fill out the cells with the numbers
                 if (dayOfMnth <= numberOfDays && (j >= firstDayOfMnthPosition || i > 1))  {
@@ -125,17 +128,42 @@ $(function() {
                 } 
             }
         }
+        */
+
+        for (var i = 1; i <= 42; i++) {
+
+
+            // fill out the cells with the numbers
+            if (dayOfMnth <= numberOfDays && i >= firstDayOfMnthPosition) {
+
+                // creating the areas with days' numbers and putting them into the calendar
+                var numberCell = $("<p class='dayNumber'></p>");
+                var calendarCell = $("#" + i);
+                console.log(calendarCell);
+                numberCell.text(dayOfMnth).appendTo(calendarCell);
+
+                //creating the dropping areas in every day cell
+                numberCell.after("<p></p>");
+
+                //painting the current day's cell
+                if (dayOfMnth == currentDay) {
+                    calendarCell.addClass("today");
+                }
+
+                dayOfMnth ++;
+            }
+        }
     }
 
 
 
-   // pulling current date from API by Ajax and placing current calendar on the website
+    // pulling current date from API by Ajax and placing current calendar on the website
     function loadCalendar() {
-        
+
         $.ajax({
             url: "https://script.google.com/macros/s/AKfycbyd5AcbAnWi2Yn0xhFRbyzS4qMq1VucMVgVvhul5XqS9HkAyJY/exec?tz=Poland",
             dataType: 'json'
-            
+
         }).done(function(response){                    
             var month = response.monthName;
             var day = response.day;
@@ -143,7 +171,7 @@ $(function() {
             var dayName = response.dayofweekName;
             beginingOfMonth(day, dayName);
             makingCalendar(day, month, year);
-            
+
         }).fail(function(error) {
             console.log(error);
         });

@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Forget-me-not</title>
-        <!--        <link rel="stylesheet" href="css/main.css">-->
+                <link rel="stylesheet" href="css/main.css">
         <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
-        <!--        <script src="js/app2.js"></script>-->
+                <script src="js/app2.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
@@ -15,14 +15,18 @@
 
         <style>
 
+/*
             * {
                 box-sizing: border-box;
                 font-family: 'Roboto', sans-serif;
             }
+*/
 
+/*
             body {
                 margin: 0;
             }
+*/
 
             table {
                 border-spacing: 6px 6px;
@@ -66,7 +70,7 @@
                 height: 40px;
             }
 
-            .dayNumber {
+          /*  .dayNumber {
                 font-size: 27px;
                 font-weight: bold;
                 text-align: right;
@@ -77,19 +81,22 @@
             .mthsName {
                 font-size: 27px;
                 letter-spacing: 2px;
-                /*                text-decoration: underline;*/
+                                text-decoration: underline;
                 text-decoration-color: #404040;
-            }
+            }*/
 
+/*
             .today {
-                /*                box-shadow: 3px 3px grey inset;*/
-                /*                background-color: #009900;*/
+                                box-shadow: 3px 3px grey inset;
+                   
                 color: #009900;
                 text-shadow: 0.8px 0.8px #c2c2a3;
 
             }
+*/
 
 
+/*
             header {
                 width: 100%;
                 height: 100px;
@@ -101,74 +108,8 @@
             }
 
 
-            header div {
-                width: 33.3%;
-                height: 100px;
-               
-                display: inline-block;
-                float: left;
-            }
-            
-
-            h1 {
-
-                        margin-top: 14px;     
-                text-align: center;
-                font-weight: 300;
-                font-size: 44px;
-/*                font-family: "Pacifico", sans-serif;*/
-                font-family: 'Alfa Slab One', cursive;
-                letter-spacing: 1px;
-                text-shadow: 2px 2px #404040;
-        
-                
-            }
-
-            h1 span {
-                color: #FF9009;
-/*                font-weight: 800;*/
-font-family: 'Alfa Slab One', cursive;
-                letter-spacing: 2px;
-
-
-            }
-
-            header p {
-      
-                font-size: 10px;
-                float: right;
-                margin-right: 14px;
-                margin-top: 66px; 
-            }
-
-            header a {
-                text-decoration: none;
-                color: #FFF;
-            }
-            
-            
-            
-            .options-container {
-                float: right;
-                display: inline-block;
-                width: 300px;
-                border: 1px solid red;
-                padding-left: 30px;
-                padding-top: 40px;
-                font-size: 17px;
-            }
-            
-            .small-container * {
-                display: inline-block;
-            }
-            
-            .ikon {
-                height: 20px;
-                width: 20px;
-                border: 1px solid green;
-                margin-right: 32px;
-                margin-top: 3px;
-            }
+ 
+   
             
             
         </style>
@@ -193,10 +134,12 @@ font-family: 'Alfa Slab One', cursive;
                     &copy; 2017 by agzaim <br> 
                     <a href="#">http:/github.com/agzaim</a>
                 </p>
+                <div class="clearfix"></div>
             </div>
 
 
         </header>
+<!--
         <table class="mnthTable">
             <tr>
                 <th colspan="7" class="mthsName"></th>
@@ -218,7 +161,82 @@ font-family: 'Alfa Slab One', cursive;
             </tr>
 
         </table> 
+-->
+        
+        
+        <div class="calendarBox">
+            <h2 class="mthsName"></h2>
+             <div class="weekRow">
+                <div class="weekNames">Mon</div>
+                <div class="weekNames">Tue</div>
+                <div class="weekNames">Wed</div>
+                <div class="weekNames">Thu</div>
+                <div class="weekNames">Fri</div>
+                <div class="weekNames">Sat</div>
+                <div class="weekNames">Sun</div>
+            </div>  
+            <div class="weekRow">
+                <div id="1" class="dayBox"></div>
+                <div id="2" class="dayBox"></div>
+                <div id="3" class="dayBox"></div>
+                <div id="4" class="dayBox"></div>
+                <div id="5" class="dayBox"></div>
+                <div id="6" class="dayBox"></div>
+                <div id="7" class="dayBox"></div>
+            </div>  
+            <div class="weekRow">
+                <div id="8" class="dayBox"></div>
+                <div id="9" class="dayBox"></div>
+                <div id="10" class="dayBox"></div>
+                <div id="11" class="dayBox"></div>
+                <div id="12" class="dayBox"></div>
+                <div id="13" class="dayBox"></div>
+                <div id="14" class="dayBox"></div>
+            </div>  
+            <div class="weekRow">
+                <div id="15" class="dayBox"></div>
+                <div id="16" class="dayBox"></div>
+                <div id="17" class="dayBox"></div>
+                <div id="18" class="dayBox"></div>
+                <div id="19" class="dayBox"></div>
+                <div id="20" class="dayBox"></div>
+                <div id="21" class="dayBox"></div>
+            </div> 
+            <div class="weekRow">
+                <div id="22" class="dayBox"></div>
+                <div id="23" class="dayBox"></div>
+                <div id="24" class="dayBox"></div>
+                <div id="25" class="dayBox"></div>
+                <div id="26" class="dayBox"></div>
+                <div id="27" class="dayBox"></div>
+                <div id="28" class="dayBox"></div>
+            </div> 
+            <div class="weekRow">
+                <div id="29" class="dayBox"></div>
+                <div id="30" class="dayBox"></div>
+                <div id="31" class="dayBox"></div>
+                <div id="32" class="dayBox"></div>
+                <div id="33" class="dayBox"></div>
+                <div id="34" class="dayBox"></div>
+                <div id="35" class="dayBox"></div>
+            </div> 
+            <div class="weekRow">
+                <div id="36" class="dayBox"></div>
+                <div id="37" class="dayBox"></div>
+                <div id="38" class="dayBox"></div>
+                <div id="39" class="dayBox"></div>
+                <div id="40" class="dayBox"></div>
+                <div id="41" class="dayBox"></div>
+                <div id="42" class="dayBox"></div>
+            </div>
+            
+            
+        </div>
+        
+        
+        
         <div class="options-container">
+            <img class="icon icons8-Barber-Scissors-Filled" width="50" height="50" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAADxklEQVRoQ9WZ/ZFNQRDFz0aADIgAESACRIAIEAEbASJABEsEiAARIAK7EVC/V7erRu/Mm+65H+/pqvfX65np059n5p7o+OSWpKeSHki6KumbpNs9M096Chv/D4DX7sxfkq737DgmIG8lPa4YfE/S5/8FSAvExynFejh06IhQA68akbiQRL387KKQDgoEEJ8mY2u2nkp6GQGBzqEi0gNBgRON82MG0gOB7Q8lfYiCOEREIiC+SLqbAbE1kAgIbLoRLfAS7FY1EgWRKvCtgURBpAt8ayC02EjOP5H0Llsbpl9LrUfTNKX9lRwH8saPbsLEjUhrYvu10QInujen1oxt2LgbmiUQ2CYHo9wTAD3vcCCG2YveRtP/sFv2LOXO5EgMJqIY3LLtwoBA1gCRlVY6cDApFZE3kp5NRmMDhnfZrtv4FCAs+hE5saLD5MWbng+xX8QY+BR67HMWJYjOju9EDCDwf+4BpdAGoc4lfcbLpJ/XNY/aerwLEYyIRTQTQdsXJ2A7v3OAeO+R+/5yUxrlDSUaDDGEHGa/SJ2VBR6NIGf8A8AMA8gf57rIkGytiRZ4mVLRNcwZdOmal8jkEkDKYo3WmpHCSEoROTJkL4kECG2P3mySSa3Ss9nBR/p9bTQF9sVwAPi2XK29VrGbB/CGCX2dYqdGPOjSs/bigZFerLhbtIUOxHTnF76LcIi1X1BfibSZQodDGVJIWaw1IHgYJ9AFAUGrNdqS9n7NzjkD0V43esUKnWHg4mGLBF2O1LFf0oeX1csOhYdIqbJeWgfY60av3b53DwukJVEJ5X0GXa3Vki6kgfEbn3K0Qf5jfpDLkMyahJ9yMga3dCMzo7UWwLWCNv30vXsOoDlAIu2WiNHOUx1oBNAokMggM3uoCRrDqjIKJBKN0vDekJ0NcgRIjfYzU2gQNAD+p62W3a8klrON3jdHMpt72l/SFNuHtvzbbXptzVoZiYin3K0nHGoDWmMS+jyQ8WipmwVSS6uWpz3g7FkpTNnNqQN4kklr6NUAZ89aFYjnVa208nqrT/msl7yB/r6OF2v8a9bjWyQ0WSA+tWqvKH7GhD5mRozdp5MFgreZCSWRBIxdhABqdxQ7d/VocFAWCGsyzz2r14Z5awQIa/09vxb13cPZmkNwzhyxtX7YeSB0s93D2dzcj64fjQj0wz/CcRuEYwFyMwBzU8s/0JUPEVEnLqo3GhE8Xnau6PeNRY1fokZIofvOqqGPmEshG41I7YY4/CFzCTCjQDjbv6D4p58l7AvvMQcIh9gla9OZUUP3F51J24KGsZsGAAAAAElFTkSuQmCC">
             <div class="small-container">
                 <div class="ikon"></div>
                 <p>Fryzjer</p>
@@ -265,6 +283,7 @@ font-family: 'Alfa Slab One', cursive;
             </div>
 
         </div>
+          <div class="clearfix"></div>
 
     </body>
 </html>

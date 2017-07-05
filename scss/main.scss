@@ -1,0 +1,175 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+body {
+    margin: 0;
+}
+
+
+.clearfix {
+    clear: both;
+}
+
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--------------------HEADER----------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #118C4E;
+    color: #FFF;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 5px #c2c2a3;
+    div {
+        width: 33.3%;
+        height: 100px;
+
+        display: inline-block;
+        float: left;
+    }
+    h1 {
+        margin-top: 14px;     
+        text-align: center;
+        font-weight: 300;
+        font-size: 44px;
+        /*                font-family: "Pacifico", sans-serif;*/
+        font-family: 'Alfa Slab One', cursive;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px #404040;
+        span {
+            color: #FF9009;
+            //            font-weight: 800;
+            font-family: 'Alfa Slab One', cursive;
+            letter-spacing: 2px;
+        }
+    }
+    p {
+        font-size: 10px;
+        float: right;
+        margin-right: 14px;
+        margin-top: 66px; 
+    }
+    a {
+        text-decoration: none;
+        color: #FFF;
+    }
+}
+
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+------------------CALENDAR---------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+.calendarBox {
+    color: #404040;
+    float: left;
+    display: inline-block;
+    margin-left: 140px;
+}
+
+//.weekRow {
+//    height: 100px;
+//}
+.weekNames {
+    background-color: #FF9009;
+    width: 94px;
+    height: 27px;
+    letter-spacing: 2px;
+    box-shadow: -2px -2px grey;
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+
+.dayBox {
+    width: 94px;
+    height: 94px;
+    box-shadow: -2px -2px grey;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 6px;
+    &:empty {
+        background-color: #e0e0d1;
+    }
+    &:last-child {
+        color: #DE1B1B;
+        background-color:  #ffffb3;
+    }
+    p {
+        width: 94px;
+        margin: 0;
+        padding: 0;
+        height: 40px;
+    }
+}
+
+
+.mthsName {
+    font-size: 27px;
+    letter-spacing: 2px;
+    /*                text-decoration: underline;*/
+    text-decoration-color: #404040;
+    margin-bottom: 6px;
+}
+
+
+p.dayNumber {
+    font-size: 27px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 14px;
+    padding-top: 5px;
+}
+
+
+.today {
+    /*                box-shadow: 3px 3px grey inset;*/
+    /*                background-color: #009900;*/
+    color: #009900;
+    text-shadow: 0.8px 0.8px #c2c2a3;
+}
+
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+------------------ICONS BOX---------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+
+.options-container {
+    float: right;
+    display: inline-block;
+    width: 300px;
+    border: 1px solid red;
+    padding-left: 30px;
+    padding-top: 40px;
+    font-size: 17px;
+}
+
+
+.small-container * {
+    display: inline-block;
+}
+
+
+.ikon {
+    height: 20px;
+    width: 20px;
+    border: 1px solid green;
+    margin-right: 32px;
+    margin-top: 3px;
+}
+
