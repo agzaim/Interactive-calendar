@@ -75,7 +75,8 @@ header {
     color: #404040;
     float: left;
     display: inline-block;
-    margin-left: 140px;
+    margin-left: 60px;
+    margin-right: 60px;
 }
 
 //.weekRow {
@@ -94,6 +95,7 @@ header {
 
 
 .dayBox {
+    vertical-align: top;
     width: 94px;
     height: 94px;
     box-shadow: -2px -2px grey;
@@ -134,7 +136,7 @@ p.dayNumber {
 }
 
 
-.today {
+div.weekRow div.today {
     /*                box-shadow: 3px 3px grey inset;*/
     /*                background-color: #009900;*/
     color: #009900;
@@ -166,10 +168,44 @@ p.dayNumber {
 
 
 .ikon {
-    height: 20px;
-    width: 20px;
+    height: 23px;
+    width: 23px;
     border: 1px solid green;
-    margin-right: 32px;
+    /*  margin-right: 32px;*/
     margin-top: 3px;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 }
 
+
+/*// nie wiem po co to*/
+.ui-draggable-handle {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+#kosme {
+    background-image: url(../images/doctor.png);
+    
+}
+
+
+.arrow {
+    float: left;
+    display: inline-block;
+    font-size: 70px;
+    font-weight: bold;
+    color: #118C4E;
+    margin-top: 300px;
+    text-shadow: 0.8px 0.8px #c2c2a3;
+    &:hover {
+        color: #C1E1A6;
+    } 
+}
+
+.arrow-left {
+    margin-left: 80px;
+}

@@ -1,7 +1,7 @@
 $(function() {
 
 
-    
+
     var dd = $(".weekNames");
     console.log(dd);
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -137,13 +137,14 @@ $(function() {
             if (dayOfMnth <= numberOfDays && i >= firstDayOfMnthPosition) {
 
                 // creating the areas with days' numbers and putting them into the calendar
-                var numberCell = $("<p class='dayNumber'></p>");
                 var calendarCell = $("#" + i);
-                console.log(calendarCell);
+                var numberCell = $("<p class='dayNumber'></p>");
                 numberCell.text(dayOfMnth).appendTo(calendarCell);
 
                 //creating the dropping areas in every day cell
-                numberCell.after("<p></p>");
+                //                var dropArea = $("<p class='dropArea'></p>");
+                //                dropArea.droppable().insertAfter(numberCell);
+                numberCell.after("<p class='dropArea' id='" + i*100 + "'></p>");
 
                 //painting the current day's cell
                 if (dayOfMnth == currentDay) {
@@ -153,10 +154,36 @@ $(function() {
                 dayOfMnth ++;
             }
         }
+
+        dragAndDrop();
+
     }
 
+    
+    
 
 
+    //making the icons draggable and calendar boxes droppable
+    function dragAndDrop() {
+
+        $("div.ikon").draggable({
+            helper: "clone"
+        });
+
+        $(".dropArea").droppable({
+            drop: function (event, ui) {
+                var id = $(ui.draggable).attr("id");
+                var icon = $(ui.draggable).html();
+                var dropBox = $(this).attr("id");
+
+                $("#" + dropBox).append('<div class="ikon" id="' + id + '">' + icon + '</div>');
+            }
+        });
+    }
+
+    
+    
+    
     // pulling current date from API by Ajax and placing current calendar on the website
     function loadCalendar() {
 
@@ -181,4 +208,25 @@ $(function() {
     loadCalendar();
 
 
+
+//adding the funcionality to the right arrow
+    function NextMnth () {
+        
+        console.log($("#29").children());
+        //searching the position of 1st
+        for (var i = 29; i < 39; i++) {
+            console.log($("#" + i).children().length);
+        
+            if ($("#" + i).children().length == null) {
+//            if ($("#" + i).is(':empty')) {
+                console.log("jest to" + i);
+                firstDayOfMnthPosition = $(this).index() + 1;
+                }
+//            console.log(firstDayOfMnthPosition);
+//         return firstDayOfMnthPosition;
+        }
+    }
+    
+    
+    NextMnth();
 });
