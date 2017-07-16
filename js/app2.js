@@ -47,6 +47,20 @@ $(function() {
 
 
 
+    if(localStorage.getItem('items') == null){
+        var json = {
+            items:[
+                [
+
+                ]
+            ]
+        };
+    } else {
+        var json = JSON.parse(localStorage.getItem('items'));
+    }
+
+
+
     // searching the position of the first day of a current month
     function beginingOfMonth (currentDay, currentDayName) {
         $.each(daysNames, function(key, value) { 
@@ -69,7 +83,6 @@ $(function() {
 
     //building a calendar 
     function makingCalendar (currentDay, currentMonth, currentYear) {
-
 
 
         // finding the number of days of a current month
@@ -162,10 +175,7 @@ $(function() {
     //adding the funcionality to the right arrow
     $(".arrow-right").on("click", function () {
 
-        
-        
-        //%%%%%%%%%%%%%%%%%%%%%%%WARTOŚC INPUTU   $$$$$$$$$
-console.log($("input.kosme").val());
+
         //searching the position of 1st day of next month
         firstDayOfMnthPosition = $("#" + (firstDayOfMnthPosition + numberOfDays)).index() + 1;
 
@@ -205,32 +215,76 @@ console.log($("input.kosme").val());
         $(".dropArea").droppable({
             drop: function (event, ui) {
                 var activity = $(ui.draggable).data("activity");
-                //                var icon = $(ui.draggable).html();
                 var dropBox = $(this).attr("id");
                 var iconClone = $('<div class="icon icon-clone" data-activity="' + activity + '"></div>');
-                var inputBox = $('<input type="text" class="' + activity + '"/>');
+                var inputBox = $('<input type="text" placeholder="Add description" class="' + activity + '"/>');
+                var tooltipBox = $('<span class="tooltip"></span>');
+
 
                 $("#" + dropBox).append(iconClone);
-                iconClone.append(inputBox);
+                iconClone.append(inputBox).append(tooltipBox);
                 inputBox.focus();
+
+
 
                 inputBox.on("keydown", function(e) {
                     var key = e.which;
                     if(key == 13) {
                         inputBox.css("display", "none");
+                        tooltipBox.text(inputBox.val());
 
+                        var event = {
+                            boxId: dropBox,
+                            eventDay: $(this).parent().parent().prev().text(),
+                            eventMonthAndYear: $(".mthsName").text(),
+                            dayIndex: $(this).parent().parent().parent().index(),
+                            description: $(this).val(),
+                            eventIcon: activity
+                        }
+                        json.items[0].push(event);
+                        localStorage.setItem("items", JSON.stringify(json));
+//                        console.log(JSON.stringify(json));
                     }
                 })
+
             }
         });
     }
 
 
-      $(".dayBox").on("click", function () {
-//          var infoBox = $("<div");
-      });
-    
 
+
+    $(".dayBox").on("click", function () {
+
+        $(".infoBox").css("display", "block").children().empty();
+
+        var pickingDay = $(this). children(".dayNumber").text();
+        $(".infoBox").find("h2").text(pickingDay);
+
+        var pickingDayIndex = $(this).index();
+        var pickingDayName = 0;
+
+        $.each(daysNames, function(key, value) { 
+            if (value == pickingDayIndex + 1) {
+                pickingDayName = key;
+            }
+        });
+
+        $(".infoBox").find("h3").text(pickingDayName);
+        
+        $(this).children(".dropArea").find(".icon").each(function(index,value){
+            var iconActivity = $(this).data("activity");
+            var iconDescription = $(this).find("input").val();
+            var infoBoxLi = $("<li>");
+            infoBoxLi.html('<div class="icon infoBoxIcon" data-activity="' + iconActivity + '"></div><span>' + iconDescription + '</span>');                        
+            $(".infoBox").find("ul").append(infoBoxLi);
+            
+        });
+
+    });
+
+
+    //removing current month from the calendar
     function calendarCleaning () {
         $(".mthsName").empty();
         $(".dayBox").empty().removeClass("today");
@@ -261,7 +315,6 @@ console.log($("input.kosme").val());
 
 
     loadCalendar();
-
 
 });
 
