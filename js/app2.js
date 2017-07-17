@@ -61,7 +61,10 @@ $(function() {
 
 
 
-    // searching the position of the first day of a current month
+    // **********************************************************
+    // searching the POSITION of the FIRST DAY of a current month
+    // **********************************************************
+
     function beginingOfMonth (currentDay, currentDayName) {
         $.each(daysNames, function(key, value) { 
             if (key == currentDayName) {
@@ -79,9 +82,10 @@ $(function() {
     }
 
 
+    // **********************************************************
+    // BUILDING a calendar 
+    // **********************************************************
 
-
-    //building a calendar 
     function makingCalendar (currentDay, currentMonth, currentYear) {
 
 
@@ -172,7 +176,10 @@ $(function() {
     }
 
 
-    //adding the funcionality to the right arrow
+    // **********************************************************
+    // adding the funcionality to the RIGHT ARROW
+    // **********************************************************
+
     $(".arrow-right").on("click", function () {
 
 
@@ -204,8 +211,68 @@ $(function() {
     });
 
 
+    // **********************************************************
+    // adding the funcionality to the LEFT ARROW
+    // **********************************************************
 
-    //making the icons draggable and calendar boxes droppable
+    $(".arrow-left").on("click", function () {
+
+        //searching the previous month name
+        var currentMnth = $(".mthsName").text().split(' ')[0];
+        var prevMnth = monthsNamesList[monthsNamesList.indexOf(currentMnth) - 1];
+
+        //searching the year of previous month
+        var currentYearString = $(".mthsName").text().split(' ')[1];
+        var prevMnthYear = parseInt(currentYearString);
+
+
+        if (currentMnth == "January") {
+
+            prevMnth = monthsNamesList[11];
+            prevMnthYear -= 1;
+        } 
+
+        //serching the number of days in previous month
+        var numberOfDaysInPrevMnth = 0;
+        $.each(monthsAndDays, function(key, value) { 
+            if (key == prevMnth) {
+                numberOfDaysInPrevMnth = value;
+            }
+        });
+
+        if (prevMnth == "February") {
+            if ((prevMnthYear % 4 == 0 && prevMnthYear % 100 != 0) || prevMnthYear % 400 == 0) {
+                numberOfDaysInPrevMnth = 29;
+            }
+        }
+
+
+        //searching the position and name of last day of previous month
+        var lastDayOfPrevMnthPosition = firstDayOfMnthPosition - 1;
+        if (firstDayOfMnthPosition == 1) {
+            lastDayOfPrevMnthPosition = 7;
+        }
+
+        var lastDayOfPrevMnthName = 0;
+        $.each(daysNames, function(key, value) { 
+            if (value == lastDayOfPrevMnthPosition) {
+                lastDayOfPrevMnthName = key;
+            }
+        });
+
+        calendarCleaning();
+
+        beginingOfMonth(numberOfDaysInPrevMnth, lastDayOfPrevMnthName);
+
+        makingCalendar(0, prevMnth, prevMnthYear);
+
+    });
+
+
+    // **********************************************************
+    // making the icons DRAGGABLE and calendar boxes DROPPABLE
+    // **********************************************************
+
     function dragAndDrop() {
 
         $("div.icon").draggable({
@@ -243,7 +310,7 @@ $(function() {
                         }
                         json.items[0].push(event);
                         localStorage.setItem("items", JSON.stringify(json));
-//                        console.log(JSON.stringify(json));
+                        //                        console.log(JSON.stringify(json));
                     }
                 })
 
@@ -253,6 +320,9 @@ $(function() {
 
 
 
+    // **********************************************************
+    // showing the DAY BOX
+    // **********************************************************
 
     $(".dayBox").on("click", function () {
 
@@ -271,28 +341,68 @@ $(function() {
         });
 
         $(".infoBox").find("h3").text(pickingDayName);
-        
+
         $(this).children(".dropArea").find(".icon").each(function(index,value){
             var iconActivity = $(this).data("activity");
             var iconDescription = $(this).find("input").val();
             var infoBoxLi = $("<li>");
-            infoBoxLi.html('<div class="icon infoBoxIcon" data-activity="' + iconActivity + '"></div><span>' + iconDescription + '</span>');                        
+            infoBoxLi.html('<div class="icon infoBoxIcon" data-activity="' + iconActivity + '"></div><span>' + iconDescription + '</span>');  
+            var editIcon = $('<i class="fa fa-pencil editButton" aria-hidden="true"></i>');
+            var deleteIcon = $('<i class="fa fa-trash-o deleteButton" aria-hidden="true"></i>');
+            infoBoxLi.append(editIcon).append(deleteIcon);
             $(".infoBox").find("ul").append(infoBoxLi);
-            
+
         });
 
+
+        editActivity();
+        deleteActivity();
     });
 
 
-    //removing current month from the calendar
+    // **********************************************************
+    // adding the funcionality to the EDIT BUTTON
+    // **********************************************************
+
+    function editActivity () {
+        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".editButton", function() {
+            $(this).toggleClass("fa-lg hoverBtn");
+        });
+    }
+
+    
+    // **********************************************************
+    // adding the funcionalities to the DELETE BUTTON
+    // **********************************************************
+
+    function deleteActivity () {
+
+        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".deleteButton", function() {
+            $(this).toggleClass("fa-lg hoverBtn");
+        });
+
+
+        $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
+            $(this).parent().remove();
+        });
+
+    }
+
+
+    // **********************************************************
+    // REMOVING current month from the calendar
+    // **********************************************************
+
     function calendarCleaning () {
         $(".mthsName").empty();
         $(".dayBox").empty().removeClass("today");
     }
 
 
-
+    // **********************************************************
     // pulling current date from API by Ajax and placing current calendar on the website
+    // **********************************************************
+
     function loadCalendar() {
 
         $.ajax({
