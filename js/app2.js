@@ -156,12 +156,12 @@ $(function() {
                 var numberCell = $("<p class='dayNumber'></p>");
                 numberCell.text(dayOfMnth).appendTo(calendarCell);
 
-                //creating the dropping areas in every day cell
+                // creating the dropping areas in every day cell
                 //                var dropArea = $("<p class='dropArea'></p>");
                 //                dropArea.droppable().insertAfter(numberCell);
                 numberCell.after("<p class='dropArea' id='" + i*100 + "'></p>");
 
-                //painting the current day's cell
+                // painting the current day's cell
                 if (dayOfMnth == currentDay) {
                     calendarCell.addClass("today");
                 }
@@ -183,16 +183,16 @@ $(function() {
     $(".arrow-right").on("click", function () {
 
 
-        //searching the position of 1st day of next month
+        // searching the position of 1st day of next month
         firstDayOfMnthPosition = $("#" + (firstDayOfMnthPosition + numberOfDays)).index() + 1;
 
 
-        //searching the next month name
+        // searching the next month name
         var currentMnth = $(".mthsName").text().split(' ')[0];
         var nextMnth = monthsNamesList[monthsNamesList.indexOf(currentMnth) + 1];
 
 
-        //searching the year of next month
+        // searching the year of next month
         var currentYearString = $(".mthsName").text().split(' ')[1];
         var nextMnthYear = parseInt(currentYearString);
 
@@ -217,11 +217,11 @@ $(function() {
 
     $(".arrow-left").on("click", function () {
 
-        //searching the previous month name
+        // searching the previous month name
         var currentMnth = $(".mthsName").text().split(' ')[0];
         var prevMnth = monthsNamesList[monthsNamesList.indexOf(currentMnth) - 1];
 
-        //searching the year of previous month
+        // searching the year of previous month
         var currentYearString = $(".mthsName").text().split(' ')[1];
         var prevMnthYear = parseInt(currentYearString);
 
@@ -232,7 +232,7 @@ $(function() {
             prevMnthYear -= 1;
         } 
 
-        //serching the number of days in previous month
+        // serching the number of days in previous month
         var numberOfDaysInPrevMnth = 0;
         $.each(monthsAndDays, function(key, value) { 
             if (key == prevMnth) {
@@ -247,7 +247,7 @@ $(function() {
         }
 
 
-        //searching the position and name of last day of previous month
+        // searching the position and name of last day of previous month
         var lastDayOfPrevMnthPosition = firstDayOfMnthPosition - 1;
         if (firstDayOfMnthPosition == 1) {
             lastDayOfPrevMnthPosition = 7;
@@ -270,6 +270,16 @@ $(function() {
 
 
     // **********************************************************
+    // REMOVING current month from the calendar
+    // **********************************************************
+
+    function calendarCleaning () {
+        $(".mthsName").empty();
+        $(".dayBox").empty().removeClass("today");
+    }
+    
+    
+    // **********************************************************
     // making the icons DRAGGABLE and calendar boxes DROPPABLE
     // **********************************************************
 
@@ -291,7 +301,6 @@ $(function() {
                 $("#" + dropBox).append(iconClone);
                 iconClone.append(inputBox).append(tooltipBox);
                 inputBox.focus();
-
 
 
                 inputBox.on("keydown", function(e) {
@@ -319,21 +328,20 @@ $(function() {
     }
 
 
-
     // **********************************************************
-    // showing the DAY BOX
+    // showing the INFO BOX
     // **********************************************************
 
     $(".dayBox").on("click", function () {
 
         $(".infoBox").css("display", "block").children().empty();
 
-        var pickingDay = $(this). children(".dayNumber").text();
-        $(".infoBox").find("h2").text(pickingDay);
-
+        var pickingDay = $(this).children(".dayNumber").text();
         var pickingDayIndex = $(this).index();
         var pickingDayName = 0;
+        var pickingDayId = $(this).attr("id"); // for easier finding right  dayBox for deleting and editing activities
 
+        $(".infoBox").find("h2").text(pickingDay).data("id", pickingDayId);
         $.each(daysNames, function(key, value) { 
             if (value == pickingDayIndex + 1) {
                 pickingDayName = key;
@@ -342,7 +350,7 @@ $(function() {
 
         $(".infoBox").find("h3").text(pickingDayName);
 
-        $(this).children(".dropArea").find(".icon").each(function(index,value){
+        $(this).children(".dropArea").find(".icon").each(function(index, value){
             var iconActivity = $(this).data("activity");
             var iconDescription = $(this).find("input").val();
             var infoBoxLi = $("<li>");
@@ -357,6 +365,7 @@ $(function() {
 
         editActivity();
         deleteActivity();
+//        closingInfoBox();
     });
 
 
@@ -365,42 +374,70 @@ $(function() {
     // **********************************************************
 
     function editActivity () {
+        // adding some magic to btn on hover event (css selector doesn't work)
         $(".infoBox ul").find("li").on("mouseenter mouseleave", ".editButton", function() {
             $(this).toggleClass("fa-lg hoverBtn");
         });
+        
+        
+        $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
+        
+        
+        });
+        
+        
     }
 
-    
+
     // **********************************************************
     // adding the funcionalities to the DELETE BUTTON
     // **********************************************************
 
     function deleteActivity () {
 
+        // adding some magic to btn on hover event (css selector doesn't work)
         $(".infoBox ul").find("li").on("mouseenter mouseleave", ".deleteButton", function() {
             $(this).toggleClass("fa-lg hoverBtn");
         });
 
-
+        // deleting icon
         $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
+            // deleting icon from infoBox
             $(this).parent().remove();
+            
+            // deleting icon from dayBox in calendar (finding by desription instead od data-activity because there could be more than one identical icon)
+            var deletedActivityDescription = $(this).parent().find("span").text();
+            var dayBoxId = $(".infoBox").find("h2").data("id");
+            $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
+                if ($(this).find("span").text() == deletedActivityDescription) {
+                    $(this).remove();
+                }
+            });
         });
-
     }
 
 
     // **********************************************************
-    // REMOVING current month from the calendar
+    // closing the INFO BOX
     // **********************************************************
+    
+    function closingInfoBox () {
 
-    function calendarCleaning () {
-        $(".mthsName").empty();
-        $(".dayBox").empty().removeClass("today");
+        // adding some magic to btn on hover event (css selector doesn't work)
+        $(".exitBtn").on("mouseenter mouseleave", function() {
+            $(this).toggleClass("hoverBtn");
+        });
+        
+         $(".exitBtn").on("click", function() {
+             $(".infoBox").css("display", "none");
+        });
     }
 
+    closingInfoBox();
 
+    
     // **********************************************************
-    // pulling current date from API by Ajax and placing current calendar on the website
+    // getting current date from API by Ajax and placing current calendar on the website
     // **********************************************************
 
     function loadCalendar() {
@@ -416,8 +453,6 @@ $(function() {
             var dayName = response.dayofweekName;
             beginingOfMonth(day, dayName);
             makingCalendar(day, month, year);
-            //            nextMnth();
-
         }).fail(function(error) {
             console.log(error);
         });
