@@ -238,11 +238,11 @@ input {
 
 .smallContainer {
     margin-bottom: 15px;
-        span {
-            vertical-align: middle;
-            margin-left: 11px;
-        }
+    span {
+        vertical-align: middle;
+        margin-left: 11px;
     }
+}
 
 
 .icon {
@@ -294,7 +294,7 @@ input {
 
 /*  
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
--------------------INFO BOX---------------------
+------------------INFO BOX----------------------
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
 */
 
@@ -343,6 +343,9 @@ input {
         margin-right: 6px;
         height: 20px;
         width: 20px;
+        &.editBtnActive {
+            color: #009900;
+        }
         &.exitBtn {
             position: absolute;
             top: 15px;
@@ -362,6 +365,7 @@ input {
     width: 30px;
     margin-right: 8px;
 }
+
 
 
 

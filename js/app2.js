@@ -46,6 +46,17 @@ $(function() {
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
+    $('#clear').on('click',function(){
+        var json = {
+            items:[
+                [
+
+                ]
+            ]
+        };
+        localStorage.setItem("items", JSON.stringify(json));
+    });
+
 
     if(localStorage.getItem('items') == null){
         var json = {
@@ -172,8 +183,232 @@ $(function() {
 
 
         dragAndDrop();  
+        archivedActivities();
 
     }
+
+
+    // **********************************************************
+    // making the icons DRAGGABLE and calendar boxes DROPPABLE
+    // **********************************************************
+
+    function dragAndDrop() {
+
+        $("div.icon").draggable({
+            helper: "clone"
+        });
+
+        $(".dropArea").droppable({
+            drop: function (event, ui) {
+                var activity = $(ui.draggable).data("activity");
+                var dropBox = $(this).attr("id");
+                var iconClone = $('<div class="icon icon-clone" data-activity="' + activity + '"></div>');
+                var inputBox = $('<input type="text" placeholder="Add description" class="' + activity + '"/>');
+                var tooltipBox = $('<span class="tooltip"></span>');
+
+
+                $("#" + dropBox).append(iconClone);
+                iconClone.append(inputBox).append(tooltipBox);
+                inputBox.focus();
+
+
+                inputBox.on("keydown", function(e) {
+                    var key = e.which;
+                    if(key == 13) {
+                        inputBox.css("display", "none");
+                        tooltipBox.text(inputBox.val());
+
+                        var event = {
+                            eventMonthAndYear: $(".mthsName").text(),
+                            boxId: dropBox,
+                            //                            eventDay: $(this).parent().parent().prev().text(),
+                            //                            dayIndex: $(this).parent().parent().parent().index(),
+                            description: $(this).val(),
+                            eventIcon: activity
+                        }
+                        json.items[0].push(event);
+                        localStorage.setItem("items", JSON.stringify(json));
+                        console.log(JSON.stringify(json));
+                    }
+                });
+            }
+        });
+    }
+
+
+    // **********************************************************
+    // getting and putting into calendar ARCHIVED activities
+    // **********************************************************
+
+    function archivedActivities() {
+
+        for (var i = 0; i < json.items.length; i++) {
+
+            $.each(json.items[i], function(index,value) {
+                if (value.eventMonthAndYear == $(".mthsName").text()) {
+                    
+                    var dropBox = value.boxId;
+                    var iconClone = $('<div class="icon icon-clone" data-activity="' + value.eventIcon + '"></div>');
+                    var tooltipBox = $('<span class="tooltip"></span>');
+                    tooltipBox.text(value.description);
+
+                    $("#" + dropBox).append(iconClone);
+                    iconClone.append(tooltipBox);
+                }
+            });
+        }
+    }
+
+
+    // **********************************************************
+    // showing the INFO BOX
+    // **********************************************************
+
+    $(".dayBox").on("click", function () {
+
+        $(".infoBox").css("display", "block").children().empty();
+
+        var pickingDay = $(this).children(".dayNumber").text();
+        var pickingDayIndex = $(this).index();
+        var pickingDayName = 0;
+        var pickingDayId = $(this).attr("id"); 
+
+        $(".infoBox").find("h2").text(pickingDay).data("id", pickingDayId); // for easier finding right  dayBox for editing and deleting activities
+        $.each(daysNames, function(key, value) { 
+            if (value == pickingDayIndex + 1) {
+                pickingDayName = key;
+            }
+        });
+
+        $(".infoBox").find("h3").text(pickingDayName);
+
+        $(this).children(".dropArea").find(".icon").each(function(index, value){
+            var iconActivity = $(this).data("activity");
+            var iconDescription = $(this).find("span").text();
+            var infoBoxLi = $("<li>");
+            infoBoxLi.html('<div class="icon infoBoxIcon" data-activity="' + iconActivity + '"></div><span>' + iconDescription + '</span>');  
+            var editIcon = $('<i class="fa fa-pencil editButton" aria-hidden="true"></i>');
+            var deleteIcon = $('<i class="fa fa-trash-o deleteButton" aria-hidden="true"></i>');
+            infoBoxLi.append(editIcon).append(deleteIcon);
+            $(".infoBox").find("ul").append(infoBoxLi);
+
+        });
+
+
+        editActivity();
+        deleteActivity();
+    });
+
+
+    // **********************************************************
+    // adding the funcionality to the EDIT BUTTON
+    // **********************************************************
+
+    function editActivity () {
+        // adding some magic to btn on hover event (css selector doesn't work)
+        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".editButton", function() {
+            $(this).toggleClass("fa-lg hoverBtn");
+        });
+
+        // editing icon description
+
+        $(".infoBox ul").find("li").on("click", ".editButton", function() {
+            $(this).toggleClass("editBtnActive");
+
+            if ($(this).hasClass("editBtnActive")) {
+
+                oldDescription = $(this).prev().text();
+                $(this).prev().attr("contenteditable", "true").focus();
+                $(this).removeClass("fa-pencil").addClass("fa-check");
+
+            } else {
+
+                var newDescription = $(this).prev().text();
+                $(this).prev().attr("contenteditable", "false");
+                $(this).removeClass("fa-check").addClass("fa-pencil");
+
+                // changing description in tooltip
+                var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 344
+
+                $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
+                    if ($(this).find("span").text() == oldDescription) {
+                        $(this).find("span").text(newDescription);
+                    }
+                });
+            }
+        });
+    }
+
+
+    // **********************************************************
+    // adding the funcionalities to the DELETE BUTTON
+    // **********************************************************
+
+    function deleteActivity () {
+
+        // adding some magic to btn on hover event (css selector doesn't work)
+        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".deleteButton", function() {
+            $(this).toggleClass("fa-lg hoverBtn");
+        });
+
+        // deleting icon
+        $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
+           
+            console.log($(".deleteButton").closest(".infoBox").length);
+            
+            
+            
+            // deleting icon from infoBox
+            $(this).parent().remove();
+
+            // deleting icon from dayBox in calendar (finding by desription instead od data-activity because there could be more than one identical icon)
+            var deletedActivityDescription = $(this).parent().find("span").text();
+            var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 254
+            $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
+                if ($(this).find("span").text() == deletedActivityDescription) {
+                    $(this).remove();
+                }
+            });
+        });
+    }
+
+
+    // **********************************************************
+    // closing the INFO BOX
+    // **********************************************************
+
+    function closingInfoBox () {
+        // adding some magic to btn on hover event (css selector doesn't work)
+        $(".exitBtn").on("mouseenter mouseleave", function() {
+            $(this).toggleClass("hoverBtn");
+        });
+
+        //  //closing infoBox by clicking on "x"
+        $(".exitBtn").on("click", function() {
+            $(".infoBox").css("display", "none");
+        });
+
+        //closing infoBox by clicking somewhere on the page
+        $("body").on("click", function(e) {    
+            if ($(".infoBox").is(":visible")) {
+
+                // except infoBox
+                if($(e.target).hasClass("infoBox")) {
+                    return;
+                }
+
+                // and except the descendants of calendar and infoBox
+                if($(e.target).closest(".calendarBox").length || $(e.target).closest(".infoBox").length) {
+                    console.log("widzi mnie");
+                    return; 
+                }
+
+                $(".infoBox").css("display", "none");
+            }
+        })
+    }
+
+    closingInfoBox();
 
 
     // **********************************************************
@@ -277,168 +512,11 @@ $(function() {
         $(".mthsName").empty();
         $(".dayBox").empty().removeClass("today");
     }
-    
-    
-    // **********************************************************
-    // making the icons DRAGGABLE and calendar boxes DROPPABLE
-    // **********************************************************
-
-    function dragAndDrop() {
-
-        $("div.icon").draggable({
-            helper: "clone"
-        });
-
-        $(".dropArea").droppable({
-            drop: function (event, ui) {
-                var activity = $(ui.draggable).data("activity");
-                var dropBox = $(this).attr("id");
-                var iconClone = $('<div class="icon icon-clone" data-activity="' + activity + '"></div>');
-                var inputBox = $('<input type="text" placeholder="Add description" class="' + activity + '"/>');
-                var tooltipBox = $('<span class="tooltip"></span>');
 
 
-                $("#" + dropBox).append(iconClone);
-                iconClone.append(inputBox).append(tooltipBox);
-                inputBox.focus();
-
-
-                inputBox.on("keydown", function(e) {
-                    var key = e.which;
-                    if(key == 13) {
-                        inputBox.css("display", "none");
-                        tooltipBox.text(inputBox.val());
-
-                        var event = {
-                            boxId: dropBox,
-                            eventDay: $(this).parent().parent().prev().text(),
-                            eventMonthAndYear: $(".mthsName").text(),
-                            dayIndex: $(this).parent().parent().parent().index(),
-                            description: $(this).val(),
-                            eventIcon: activity
-                        }
-                        json.items[0].push(event);
-                        localStorage.setItem("items", JSON.stringify(json));
-                        //                        console.log(JSON.stringify(json));
-                    }
-                })
-
-            }
-        });
-    }
-
-
-    // **********************************************************
-    // showing the INFO BOX
-    // **********************************************************
-
-    $(".dayBox").on("click", function () {
-
-        $(".infoBox").css("display", "block").children().empty();
-
-        var pickingDay = $(this).children(".dayNumber").text();
-        var pickingDayIndex = $(this).index();
-        var pickingDayName = 0;
-        var pickingDayId = $(this).attr("id"); // for easier finding right  dayBox for deleting and editing activities
-
-        $(".infoBox").find("h2").text(pickingDay).data("id", pickingDayId);
-        $.each(daysNames, function(key, value) { 
-            if (value == pickingDayIndex + 1) {
-                pickingDayName = key;
-            }
-        });
-
-        $(".infoBox").find("h3").text(pickingDayName);
-
-        $(this).children(".dropArea").find(".icon").each(function(index, value){
-            var iconActivity = $(this).data("activity");
-            var iconDescription = $(this).find("input").val();
-            var infoBoxLi = $("<li>");
-            infoBoxLi.html('<div class="icon infoBoxIcon" data-activity="' + iconActivity + '"></div><span>' + iconDescription + '</span>');  
-            var editIcon = $('<i class="fa fa-pencil editButton" aria-hidden="true"></i>');
-            var deleteIcon = $('<i class="fa fa-trash-o deleteButton" aria-hidden="true"></i>');
-            infoBoxLi.append(editIcon).append(deleteIcon);
-            $(".infoBox").find("ul").append(infoBoxLi);
-
-        });
-
-
-        editActivity();
-        deleteActivity();
-//        closingInfoBox();
-    });
-
-
-    // **********************************************************
-    // adding the funcionality to the EDIT BUTTON
-    // **********************************************************
-
-    function editActivity () {
-        // adding some magic to btn on hover event (css selector doesn't work)
-        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".editButton", function() {
-            $(this).toggleClass("fa-lg hoverBtn");
-        });
-        
-        
-        $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
-        
-        
-        });
-        
-        
-    }
-
-
-    // **********************************************************
-    // adding the funcionalities to the DELETE BUTTON
-    // **********************************************************
-
-    function deleteActivity () {
-
-        // adding some magic to btn on hover event (css selector doesn't work)
-        $(".infoBox ul").find("li").on("mouseenter mouseleave", ".deleteButton", function() {
-            $(this).toggleClass("fa-lg hoverBtn");
-        });
-
-        // deleting icon
-        $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
-            // deleting icon from infoBox
-            $(this).parent().remove();
-            
-            // deleting icon from dayBox in calendar (finding by desription instead od data-activity because there could be more than one identical icon)
-            var deletedActivityDescription = $(this).parent().find("span").text();
-            var dayBoxId = $(".infoBox").find("h2").data("id");
-            $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
-                if ($(this).find("span").text() == deletedActivityDescription) {
-                    $(this).remove();
-                }
-            });
-        });
-    }
-
-
-    // **********************************************************
-    // closing the INFO BOX
-    // **********************************************************
-    
-    function closingInfoBox () {
-
-        // adding some magic to btn on hover event (css selector doesn't work)
-        $(".exitBtn").on("mouseenter mouseleave", function() {
-            $(this).toggleClass("hoverBtn");
-        });
-        
-         $(".exitBtn").on("click", function() {
-             $(".infoBox").css("display", "none");
-        });
-    }
-
-    closingInfoBox();
-
-    
-    // **********************************************************
-    // getting current date from API by Ajax and placing current calendar on the website
-    // **********************************************************
+    // *************************************************************
+    // getting current date from API by AJAX and placing current calendar on the website
+    // *************************************************************
 
     function loadCalendar() {
 
@@ -460,6 +538,7 @@ $(function() {
 
 
     loadCalendar();
+
 
 });
 
