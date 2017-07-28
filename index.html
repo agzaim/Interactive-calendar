@@ -2,68 +2,21 @@
 <html lang="pl-PL">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Forget-me-not</title>
         <link rel="stylesheet" href="css/main.css">
+        <link rel="shortcut icon" href="images/favicon.ico"> 
         <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
-<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
         <script src="js/app2.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-
-
-        <style>
-
-          
-            table {
-                border-spacing: 6px 6px;
-                color: #404040;
-                float: left;
-                display: inline-block;
-                margin-left: 140px;
-            }
-
-            td {
-                width: 94px;
-                height: 94px;
-                /*                border: 1px solid darkgrey;*/
-                /*                margin: 3px 3px;*/
-                box-shadow: -2px -2px grey;
-            }
-
-
-
-            th:not(.mthsName){
-                background-color: #FF9009;
-                width: 90px;
-                height: 27px;
-                letter-spacing: 2px;
-                box-shadow: -2px -2px grey;
-            }
-
-            td:last-child {
-                color: #DE1B1B;
-                background-color:  #ffffb3;
-            }
-
-            td:empty {
-                background-color: #e0e0d1;
-            }
-
-            table p {
-                width: 94px;
-                margin: 0;
-                padding: 0;
-                height: 40px;
-            }
-
-
-
-
-        </style>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  
     </head>
     <body>
 
@@ -81,31 +34,9 @@
             </div>
 
         </header>
-        <!--
-<table class="mnthTable">
-<tr>
-<th colspan="7" class="mthsName"></th>
-</tr>
-<tr></tr> 
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr></tr>
-<tr>
-<th>Mon</th>
-<th>Tue</th>
-<th>Wed</th>
-<th>Thu</th>
-<th>Fri</th>
-<th>Sat</th>
-<th>Sun</th>
-</tr>
-
-</table> 
--->
-
-<p class="arrow arrow-left"><</p>
+        
+<div class="icon" data-activity="cleaning" id="clear"><span class="tooltip">Clear the calendar</span></div>
+        <p class="arrow arrow-left"><</p>
         <div class="calendarBox">
             <h2 class="mthsName"></h2>
             <div class="weekRow weekNamesBox">
@@ -177,44 +108,64 @@
 
         <ul class="activitiesContainer">
             <li class="smallContainer">
-                <div class="icon" data-activity="hair"></div>
-                <span>Fryzjer</span>
+                <div class="icon" data-activity="flight"></div>
+                <span>Flight</span>
             </li>
             <li class="smallContainer">
-                <div class="icon" data-activity="kosme"></div>
-                <span>Kosmetyczka</span>
+                <div class="icon" data-activity="meeting"></div>
+                <span>Meeting</span>
             </li>
             <li class="smallContainer">
-                <div class="icon" data-activity="meeting">M</div>
-                <span>Spotkanie</span>
+                <div class="icon" data-activity="doctor"></div>
+                <span>Doctor</span>
             </li>
             <li class="smallContainer">
-                <div class="icon" data-activity="birth">B</div>
-                <span>Urodziny</span>
+                <div class="icon" data-activity="birthday"></div>
+                <span>Birthday</span>
             </li>
             <li class="smallContainer">
-                <div class="icon"></div>
-                <span>Samolot</span>
+                <div class="icon" data-activity="concert"></div>
+                <span>Concert</span>
             </li>
             <li class="smallContainer">
-                <div class="icon"></div>
-                <span>Description</span>
+                <div class="icon" data-activity="dinner"></div>
+                <span>Dinner</span>
             </li>
-             <li class="smallContainer">
-                <div class="icon"></div>
-                <span>Description</span>
+            <li class="smallContainer">
+                <div class="icon" data-activity="beautician"></div>
+                <span>Beautician</span>
             </li>
-             <li class="smallContainer">
-                <div class="icon"></div>
-                <span>Description</span>
+            <li class="smallContainer">
+                <div class="icon" data-activity="friendMeeting"></div>
+                <span>Friend Meeting</span>
             </li>
-             <li class="smallContainer">
-                <div class="icon"></div>
-                <span>Description</span>
+            <li class="smallContainer">
+                <div class="icon" data-activity="dentist"></div>
+                <span>Dentist</span>
             </li>
-             <li class="smallContainer">
-                <div class="icon" id="clear"></div>
-                <span>clear</span>
+            <li class="smallContainer">
+                <div class="icon" data-activity="project"></div>
+                <span>Project</span>
+            </li>
+            <li class="smallContainer">
+                <div class="icon" data-activity="game"></div>
+                <span>Game</span>
+            </li>
+            <li class="smallContainer">
+                <div class="icon" data-activity="vacation"></div>
+                <span>Vacation</span>
+            </li>
+            <li class="smallContainer">
+                <div class="icon" data-activity="cinema"></div>
+                <span>Cinema</span>
+            </li>
+            <li class="smallContainer">
+                <div class="icon" data-activity="hairdresser"></div>
+                <span>Hairdresser</span>
+            </li>
+            <li class="smallContainer">
+                <div class="icon" data-activity="individual"></div>
+                <span>Other</span>
             </li>
 
         </ul>
@@ -227,6 +178,10 @@
             <ul>
             </ul>
         </div>
+<!--
+        <div class="px test"></div>
+        <div class="rem test"></div>
+-->
         <br>
         <br>
         <br>

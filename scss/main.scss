@@ -1,8 +1,12 @@
 * {
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
 }
 
 
@@ -11,9 +15,10 @@
 }
 
 
+$header-color: #118C4E;
 $lighter-green: #C1E1A6;
 $border-color: #808080;
-$text-color: #404040;
+$text-color: #4d4d4d;
 $buttons-color: #b3b3b3;
 
 
@@ -27,7 +32,7 @@ $buttons-color: #b3b3b3;
 header {
     width: 100%;
     height: 100px;
-    background-color: #118C4E;
+    background-color: $header-color;
     color: #FFF;
     margin-bottom: 50px;
     box-shadow: 0 4px 5px #c2c2a3;
@@ -67,6 +72,27 @@ header {
 }
 
 
+div[data-activity="cleaning"]  {
+    background-image: url(../images/clear.png);
+    display: block;
+    position: absolute;
+    top: 119px;
+    left: 19px;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover .tooltip {
+        display: inline-block;
+        opacity: 1;
+        left: 36px;
+        top: 1px;
+        letter-spacing: 1.2px;
+        width: 152px;
+        height: 23px;
+        padding: 3px 0;
+    }
+}
+
+
 /*  
 &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 ------------------CALENDAR---------------------
@@ -77,16 +103,27 @@ header {
     color: $text-color;
     float: left;
     display: inline-block;
-    margin-left: 60px;
+    margin-left: 67px;
     margin-right: 60px;
 }
 
-//.weekRow {
-//    height: 100px;
-//}
+
+.mthsName {
+    //    font-family: "Roboto", sans-serif;
+    font-size: 34px;
+    letter-spacing: 4px;
+    height: 38px;
+    margin-bottom: 23px;
+    text-align: center;
+    margin-top: 0;
+    font-weight: 900;
+}
+
+
 .weekNames {
+    font-family: "Roboto", sans-serif;
     background-color: #FF9009;
-    width: 94px;
+    width: 96px;
     height: 27px;
     letter-spacing: 2px;
     box-shadow: -2px -2px $border-color;
@@ -95,69 +132,68 @@ header {
     margin-bottom: 6px;
     text-align: center;
     padding-top: 3.9px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 
 .dayBox {
     vertical-align: top;
-    width: 94px;
-    height: 94px;
+    width: 96px;
+    height: 96px;
     box-shadow: -2px -2px $border-color;
-    color: #808080;
+    //    color: #595959;
+    //    color: $text-color;
     display: inline-block;
     margin-right: 6px;
     margin-top: 6px;
-    &:empty {
-        background-color: #e0e0d1;
-    }
     &:last-child {
         color: #DE1B1B;
         background-color:  #ffffb3;
     }
+    &:empty {
+        background-color: #e0e0d1;
+    }
     &:hover {
+        cursor: pointer;
         background-color: $lighter-green;
     }
-    p {
-        width: 94px;
-        margin: 0;
-        padding: 0;
-        height: 45px;
+    &:empty:hover {
+        background-color: #e0e0d1;
+        cursor: default;
     }
-}
-
-
-.mthsName {
-    font-size: 34px;
-    letter-spacing: 2px;
-    //                    text-decoration: underline;
-    //    text-decoration-color: #404040;
-    height: 38px;
-    margin-bottom: 23px;
-    //    padding-left: 200px;
-    text-align: center;
-    margin-top: 0;
 }
 
 
 p.dayNumber {
+    //    font-family: "Roboto", sans-serif;
     font-size: 27px;
     font-weight: bold;
     text-align: right;
     padding-right: 14px;
     padding-top: 5px;
+    height: 42px;
+    width: 94px;
 }
 
 
-div.weekRow {
-    div.today {
-        /*                box-shadow: 3px 3px grey inset;*/
-        /*                background-color: #009900;*/
-        color: #009900;
-        text-shadow: 0.8px 0.8px #c2c2a3;
-    }
+p.dropArea {
+    height: 47px;
+    width: 94px;
+    padding-left: 4px;
 }
 
+
+
+div.today, .infoBox h2.today {
+    /*                box-shadow: 3px 3px grey inset;*/
+    /*                background-color: #009900;*/
+    color: #009900;
+    text-shadow: 0.8px 0.8px #c2c2a3;
+}
+
+.infoBox h2.sunday {
+    color: #DE1B1B;
+}
 
 
 /*  
@@ -182,6 +218,7 @@ div.weekRow {
 input {
     position: absolute;
     left: 30px;
+    z-index: 4;
     border: 1px solid $border-color;
     box-shadow: 4px 4px 6px #c2c2a3;
     &:focus {
@@ -197,8 +234,8 @@ input {
     color: $text-color;
     font-weight: bold;
     text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
+    padding: 2px 0;
+    border-radius: 5px;
     position: absolute;
     left: 30px;
     z-index: 1;
@@ -224,15 +261,20 @@ input {
 
 
 .activitiesContainer {
+    font-family: "Raleway", sans-serif;
     float: right;
     display: inline-block;
     width: 300px;
-    border: 1px solid red;
-    padding-left: 30px;
-    padding-top: 97px;
+    padding-left: 60px;
+    padding-top: 60px;
     font-size: 16px;
     list-style: none;
-    letter-spacing: 1.3px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    color: $text-color; 
+    .icon:hover {
+        cursor: pointer;
+    }
 }
 
 
@@ -240,26 +282,96 @@ input {
     margin-bottom: 15px;
     span {
         vertical-align: middle;
-        margin-left: 11px;
+        margin-left: 19px;
     }
 }
 
 
 .icon {
-    height: 25px;
-    width: 25px;
-    border: 1px solid green;
+    height: 26px;
+    width: 26px;
+    border: 1.4px solid $text-color;
     display: inline-block;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 70%;
+    background-size: 68%;
     border-radius: 50%;
     vertical-align: middle;
 }
 
 
-[data-activity="kosme"]  {
+[data-activity="doctor"]  {
     background-image: url(../images/doctor.png);
+}
+
+
+[data-activity="friendMeeting"]  {
+    background-image: url(../images/beer.png);
+}
+
+
+[data-activity="game"]  {
+    background-image: url(../images/ball.png);
+}
+
+
+[data-activity="flight"]  {
+    background-image: url(../images/flight.png);
+}
+
+
+[data-activity="vacation"]  {
+    background-image: url(../images/vacation.png);
+}
+
+
+[data-activity="concert"]  {
+    background-image: url(../images/microphone.png);
+}
+
+
+[data-activity="beautician"]  {
+    background-image: url(../images/nail.png);
+}
+
+
+[data-activity="cinema"]  {
+    background-image: url(../images/cinema5.png);
+}
+
+
+[data-activity="dinner"]  {
+    background-image: url(../images/dinner.png);
+}
+
+
+[data-activity="dentist"]  {
+    background-image: url(../images/teeth.png);
+}
+
+
+[data-activity="meeting"]  {
+    background-image: url(../images/hello.png);
+}
+
+
+[data-activity="project"]  {
+    background-image: url(../images/project6.png);
+}
+
+
+[data-activity="birthday"]  {
+    background-image: url(../images/gift.png);
+}
+
+
+[data-activity="hairdresser"]  {
+    background-image: url(../images/scissors.png);
+}
+
+
+[data-activity="individual"]  {
+    background-image: url(../images/star2.png);
 }
 
 
@@ -275,7 +387,7 @@ input {
     display: inline-block;
     font-size: 70px;
     font-weight: bold;
-    color: #118C4E;
+    color: $header-color;
     margin-top: 300px;
     //    text-shadow: 2px 2px 3px #c2c2a3;
     text-shadow: 2px 2px $border-color;
@@ -302,12 +414,12 @@ input {
 
 .infoBox {
     width: 460px;
-    height: 330px;
+    height: 336px;
     box-shadow: 4px 4px 6px #c2c2a3;
     border: 1px solid $border-color;
     position: absolute;
     top: 329px;
-    left: 304px;
+    left: 311px;
     background-color: #FFF;
     display: none;
     h2 {
@@ -343,9 +455,6 @@ input {
         margin-right: 6px;
         height: 20px;
         width: 20px;
-        &.editBtnActive {
-            color: #009900;
-        }
         &.exitBtn {
             position: absolute;
             top: 15px;
@@ -355,6 +464,9 @@ input {
         &.hoverBtn {
             color: #000;
             cursor: pointer;
+        }
+        &.editBtnActive {
+            color: #009900;
         }
     }
 }
@@ -367,6 +479,19 @@ input {
 }
 
 
+
+/*
+.px {
+    width: 50px;
+    height: 50px;
+background-color: black;
+}
+
+.rem {
+    width: 50px;
+    height: 50px;
+background-color: black;
+}*/
 
 
 

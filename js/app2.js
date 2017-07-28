@@ -46,28 +46,12 @@ $(function() {
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
-    $('#clear').on('click',function(){
-        var json = {
-            items:[
-                [
 
-                ]
-            ]
-        };
-        localStorage.setItem("items", JSON.stringify(json));
-    });
-
-
-    if(localStorage.getItem('items') == null){
-        var json = {
-            items:[
-                [
-
-                ]
-            ]
-        };
+    if (localStorage.getItem("json") == null) {
+        var json = [
+        ];
     } else {
-        var json = JSON.parse(localStorage.getItem('items'));
+        var json = JSON.parse(localStorage.getItem("json"));
     }
 
 
@@ -121,41 +105,6 @@ $(function() {
         var calendarTable = $(".calendarBox");
         var dayOfMnth = 1;
 
-        /*
-        for (var i = 1; i <= 6; i++) {
-            // creating weeks and putting them into the calendar
-            var newWeek = $("<tr></tr>");
-            newWeek.appendTo(calendarTable);
-
-            for (var j = 1; j <= 7; j++) {
-
-                // creating table cells and putting them into the calendar
-                var tableCell = $("<td></td>");
-                newWeek.append(tableCell);
-
-
-                //painting the current day cell
-                if (dayOfMnth == currentDay) {
-                    tableCell.addClass("today");
-                }
-
-
-                // fill out the cells with the numbers
-                if (dayOfMnth <= numberOfDays && (j >= firstDayOfMnthPosition || i > 1))  {
-
-                    // creating the areas with days' numbers and putting them into the calendar
-                    var newDay = $("<p class='dayNumber'></p>");
-                    newDay.text(dayOfMnth).appendTo(tableCell);
-
-                    //creating the dropping areas in every day cell
-                    newDay.after("<p class='droppingArea' ondrop='drop(event)' ondragover='allowDrop(event)'></p>");
-
-                    dayOfMnth ++;
-                } 
-            }
-        }
-        */
-
         for (var i = 1; i <= 42; i++) {
 
 
@@ -166,15 +115,15 @@ $(function() {
                 var calendarCell = $("#" + i);
                 var numberCell = $("<p class='dayNumber'></p>");
                 numberCell.text(dayOfMnth).appendTo(calendarCell);
-
-                // creating the dropping areas in every day cell
-                //                var dropArea = $("<p class='dropArea'></p>");
-                //                dropArea.droppable().insertAfter(numberCell);
                 numberCell.after("<p class='dropArea' id='" + i*100 + "'></p>");
 
                 // painting the current day's cell
                 if (dayOfMnth == currentDay) {
                     calendarCell.addClass("today");
+                }
+
+                if (calendarCell.index() == 6) {
+                    calendarCell.addClass("sunday");
                 }
 
                 dayOfMnth ++;
@@ -198,18 +147,20 @@ $(function() {
             helper: "clone"
         });
 
-        $(".dropArea").droppable({
+        $(".dayBox").droppable({
             drop: function (event, ui) {
                 var activity = $(ui.draggable).data("activity");
-                var dropBox = $(this).attr("id");
+                var dropBox = $(this).find(".dropArea").attr("id");
                 var iconClone = $('<div class="icon icon-clone" data-activity="' + activity + '"></div>');
                 var inputBox = $('<input type="text" placeholder="Add description" class="' + activity + '"/>');
                 var tooltipBox = $('<span class="tooltip"></span>');
 
-
-                $("#" + dropBox).append(iconClone);
-                iconClone.append(inputBox).append(tooltipBox);
-                inputBox.focus();
+                
+                if ($(this).find(".dropArea").children().length < 6) {
+                    $("#" + dropBox).append(iconClone);
+                    iconClone.append(inputBox).append(tooltipBox);
+                    inputBox.focus();
+                } 
 
 
                 inputBox.on("keydown", function(e) {
@@ -218,17 +169,16 @@ $(function() {
                         inputBox.css("display", "none");
                         tooltipBox.text(inputBox.val());
 
+                        // setting data to localStorage
                         var event = {
                             eventMonthAndYear: $(".mthsName").text(),
                             boxId: dropBox,
-                            //                            eventDay: $(this).parent().parent().prev().text(),
-                            //                            dayIndex: $(this).parent().parent().parent().index(),
                             description: $(this).val(),
                             eventIcon: activity
                         }
-                        json.items[0].push(event);
-                        localStorage.setItem("items", JSON.stringify(json));
-                        console.log(JSON.stringify(json));
+
+                        json.push(event);
+                        localStorage.setItem("json", JSON.stringify(json));   
                     }
                 });
             }
@@ -242,21 +192,20 @@ $(function() {
 
     function archivedActivities() {
 
-        for (var i = 0; i < json.items.length; i++) {
+        //        console.log(JSON.stringify(json));
+        $.each(json, function(index, value) {
 
-            $.each(json.items[i], function(index,value) {
-                if (value.eventMonthAndYear == $(".mthsName").text()) {
-                    
-                    var dropBox = value.boxId;
-                    var iconClone = $('<div class="icon icon-clone" data-activity="' + value.eventIcon + '"></div>');
-                    var tooltipBox = $('<span class="tooltip"></span>');
-                    tooltipBox.text(value.description);
+            if (value.eventMonthAndYear == $(".mthsName").text()) {
 
-                    $("#" + dropBox).append(iconClone);
-                    iconClone.append(tooltipBox);
-                }
-            });
-        }
+                var dropBox = value.boxId;
+                var iconClone = $('<div class="icon icon-clone" data-activity="' + value.eventIcon + '"></div>');
+                var tooltipBox = $('<span class="tooltip"></span>');
+                tooltipBox.text(value.description);
+
+                iconClone.append(tooltipBox);
+                $("#" + dropBox).append(iconClone);  
+            }
+        });
     }
 
 
@@ -266,7 +215,10 @@ $(function() {
 
     $(".dayBox").on("click", function () {
 
-        $(".infoBox").css("display", "block").children().empty();
+        if ($(this).children().length > 0) {
+            $(".infoBox").css("display", "block").children().empty();
+            $(".infoBox").find("h2").removeClass();
+        }
 
         var pickingDay = $(this).children(".dayNumber").text();
         var pickingDayIndex = $(this).index();
@@ -274,6 +226,16 @@ $(function() {
         var pickingDayId = $(this).attr("id"); 
 
         $(".infoBox").find("h2").text(pickingDay).data("id", pickingDayId); // for easier finding right  dayBox for editing and deleting activities
+
+        if ($(this).hasClass("today")) {
+            $(".infoBox").find("h2").addClass("today");
+        } 
+
+        if ($(this).hasClass("sunday")) {
+            $(".infoBox").find("h2").addClass("sunday");
+        }
+
+
         $.each(daysNames, function(key, value) { 
             if (value == pickingDayIndex + 1) {
                 pickingDayName = key;
@@ -311,7 +273,6 @@ $(function() {
         });
 
         // editing icon description
-
         $(".infoBox ul").find("li").on("click", ".editButton", function() {
             $(this).toggleClass("editBtnActive");
 
@@ -323,18 +284,38 @@ $(function() {
 
             } else {
 
-                var newDescription = $(this).prev().text();
                 $(this).prev().attr("contenteditable", "false");
                 $(this).removeClass("fa-check").addClass("fa-pencil");
 
                 // changing description in tooltip
-                var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 344
+                var newDescription = $(this).prev().text();
+                var editingIcon = $(this).siblings("div.icon").data("activity");
+                var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 228
 
                 $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
-                    if ($(this).find("span").text() == oldDescription) {
-                        $(this).find("span").text(newDescription);
+                    if ($(this).data("activity") == editingIcon) {
+                        if ($(this).find("span").text() == oldDescription) {
+                            $(this).find("span").text(newDescription);
+                        }
                     }
                 });
+
+                var dropBoxId = $("#" + dayBoxId).find(".dropArea").attr("id");
+
+                // updating data in localStorage 
+                for (var i = 0; i < json.length; i++) {
+                    if (json[i].boxId == dropBoxId) {
+                        if  (json[i].eventIcon == editingIcon) {
+                            if  (json[i].eventMonthAndYear == $(".mthsName").text()) {
+                                if (json[i].description == oldDescription) {
+                                    json[i].description = newDescription;
+                                    localStorage.setItem("json", JSON.stringify(json)); 
+                                    return;
+                                }
+                            }
+                        }
+                    }                  
+                }
             }
         });
     }
@@ -351,24 +332,42 @@ $(function() {
             $(this).toggleClass("fa-lg hoverBtn");
         });
 
-        // deleting icon
+        // deleting an icon
         $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
-           
+
             console.log($(".deleteButton").closest(".infoBox").length);
-            
-            
-            
-            // deleting icon from infoBox
+
+            // deleting an icon from infoBox
             $(this).parent().remove();
 
-            // deleting icon from dayBox in calendar (finding by desription instead od data-activity because there could be more than one identical icon)
+            // deleting an icon from dayBox in calendar 
             var deletedActivityDescription = $(this).parent().find("span").text();
-            var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 254
+            var deletingIcon = $(this).siblings("div.icon").data("activity");
+            var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 228
             $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
-                if ($(this).find("span").text() == deletedActivityDescription) {
-                    $(this).remove();
+                if ($(this).data("activity") == deletingIcon) {
+                    if ($(this).find("span").text() == deletedActivityDescription) {
+                        $(this).remove();
+                    }
                 }
             });
+
+            // updating data in localStorage 
+            var dropBoxId = $("#" + dayBoxId).find(".dropArea").attr("id");
+
+            for (var i = 0; i < json.length; i++) {
+                if (json[i].boxId == dropBoxId) {
+                    if  (json[i].eventIcon == deletingIcon) {
+                        if  (json[i].eventMonthAndYear == $(".mthsName").text()) {
+                            if (json[i].description == deletedActivityDescription) {
+                                json.splice(i, 1);
+                                localStorage.setItem("json", JSON.stringify(json)); 
+                                return;
+                            }
+                        }
+                    }
+                }                  
+            }
         });
     }
 
@@ -439,7 +438,7 @@ $(function() {
         } 
 
 
-        calendarCleaning();
+        removingMonth();
 
         makingCalendar(0, nextMnth, nextMnthYear);
 
@@ -495,7 +494,7 @@ $(function() {
             }
         });
 
-        calendarCleaning();
+        removingMonth();
 
         beginingOfMonth(numberOfDaysInPrevMnth, lastDayOfPrevMnthName);
 
@@ -508,10 +507,23 @@ $(function() {
     // REMOVING current month from the calendar
     // **********************************************************
 
-    function calendarCleaning () {
+    function removingMonth () {
         $(".mthsName").empty();
         $(".dayBox").empty().removeClass("today");
     }
+
+
+    // **********************************************************
+    // adding the funcionality to the CLEAR BUTTON
+    // **********************************************************
+
+    $("#clear").on("click", function() {
+        var json = [
+        ];
+        localStorage.setItem("json", JSON.stringify(json));
+
+        $(".dropArea").empty();
+    });
 
 
     // *************************************************************
