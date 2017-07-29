@@ -1,0 +1,122 @@
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+------------------ICONS BOX---------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+
+.activitiesContainer {
+    font-family: "Raleway", sans-serif;
+    float: right;
+    display: inline-block;
+    width: 300px;
+    padding-left: 60px;
+    padding-top: 60px;
+    font-size: 16px;
+    list-style: none;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    color: $text-color; 
+    .icon:hover {
+        cursor: pointer;
+    }
+}
+
+
+.smallContainer {
+    margin-bottom: 15px;
+    span {
+        vertical-align: middle;
+        margin-left: 19px;
+    }
+}
+
+
+.icon {
+    height: 26px;
+    width: 26px;
+    border: 1.4px solid $text-color;
+    display: inline-block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 68%;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+
+[data-activity="doctor"]  {
+    background-image: url(../images/doctor.png);
+}
+
+
+[data-activity="friendMeeting"]  {
+    background-image: url(../images/beer.png);
+}
+
+
+[data-activity="game"]  {
+    background-image: url(../images/ball.png);
+}
+
+
+[data-activity="flight"]  {
+    background-image: url(../images/flight.png);
+}
+
+
+[data-activity="vacation"]  {
+    background-image: url(../images/vacation.png);
+}
+
+
+[data-activity="concert"]  {
+    background-image: url(../images/microphone.png);
+}
+
+
+[data-activity="beautician"]  {
+    background-image: url(../images/nail.png);
+}
+
+
+[data-activity="cinema"]  {
+    background-image: url(../images/cinema5.png);
+}
+
+
+[data-activity="dinner"]  {
+    background-image: url(../images/dinner.png);
+}
+
+
+[data-activity="dentist"]  {
+    background-image: url(../images/teeth.png);
+}
+
+
+[data-activity="meeting"]  {
+    background-image: url(../images/hello.png);
+}
+
+
+[data-activity="project"]  {
+    background-image: url(../images/project6.png);
+}
+
+
+[data-activity="birthday"]  {
+    background-image: url(../images/gift.png);
+}
+
+
+[data-activity="hairdresser"]  {
+    background-image: url(../images/scissors.png);
+}
+
+
+[data-activity="individual"]  {
+    background-image: url(../images/star2.png);
+}
+

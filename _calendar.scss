@@ -1,0 +1,103 @@
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+------------------CALENDAR---------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+.calendarBox {
+    color: $text-color;
+    float: left;
+    display: inline-block;
+    margin-left: 67px;
+    margin-right: 60px;
+}
+
+
+.mthsName {
+    font-size: 34px;
+    letter-spacing: 4px;
+    height: 38px;
+    margin-bottom: 23px;
+    text-align: center;
+    margin-top: 0;
+    font-weight: 900;
+    font-family: 'Alfa Slab One', sans-serif;
+}
+
+
+.weekNames {
+    font-family: "Roboto", sans-serif;
+    background-color: #FF9009;
+    width: 96px;
+    height: 27px;
+    letter-spacing: 2px;
+    box-shadow: -2px -2px $border-color;
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    text-align: center;
+    padding-top: 3.9px;
+    font-weight: 900;
+}
+
+
+.dayBox {
+    vertical-align: top;
+    width: 96px;
+    height: 96px;
+    box-shadow: -2px -2px $border-color;
+    //    color: #595959;
+    //    color: $text-color;
+    display: inline-block;
+    margin-right: 6px;
+    margin-top: 6px;
+    &:last-child {
+        color: #DE1B1B;
+        background-color:  #ffffb3;
+    }
+    &:empty {
+        background-color: #e0e0d1;
+    }
+    &:hover {
+        cursor: pointer;
+        background-color: $lighter-green;
+    }
+    &:empty:hover {
+        background-color: #e0e0d1;
+        cursor: default;
+    }
+}
+
+
+p.dayNumber {
+    //    font-family: "Roboto", sans-serif;
+    font-size: 27px;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 14px;
+    padding-top: 5px;
+    height: 42px;
+    width: 94px;
+}
+
+
+p.dropArea {
+    height: 47px;
+    width: 94px;
+    padding-left: 4px;
+}
+
+
+
+div.today, .infoBox h2.today {
+    /*                box-shadow: 3px 3px grey inset;*/
+    /*                background-color: #009900;*/
+    color: #009900;
+    text-shadow: 0.8px 0.8px #c2c2a3;
+}
+
+.infoBox h2.sunday {
+    color: #DE1B1B;
+}
+

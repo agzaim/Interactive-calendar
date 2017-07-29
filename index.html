@@ -11,31 +11,30 @@
         <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
         <script src="js/app2.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Playball" rel="stylesheet">
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-  
+
     </head>
     <body>
 
         <header>
-            <div></div>
-            <div>
+            <div class="headerPiece"><div class="icon" id="helpIcon">?</div>
+            </div>
+            <div class="headerPiece">
                 <h1>Forget-<span>me</span>-not</h1>
             </div>
-            <div>
+            <div class="headerPiece">
                 <p>
                     &copy; 2017 by agzaim <br> 
-                    <a href="#">http:/github.com/agzaim</a>
+                    <a href="https://github.com/agzaim" target="_blank">http:/github.com/agzaim</a>
                 </p>
                 <div class="clearfix"></div>
             </div>
 
         </header>
-        
-<div class="icon" data-activity="cleaning" id="clear"><span class="tooltip">Clear the calendar</span></div>
+
+        <div class="icon" data-activity="cleaning" id="clear"><span class="tooltip">Clear the calendar</span></div>
         <p class="arrow arrow-left"><</p>
         <div class="calendarBox">
             <h2 class="mthsName"></h2>
@@ -178,9 +177,16 @@
             <ul>
             </ul>
         </div>
-<!--
-        <div class="px test"></div>
-        <div class="rem test"></div>
+        <!--        <div class="helpBoxContainer">-->
+        <div class="helpBox">
+            <i class="fa fa-times helpBoxExitBtn" aria-hidden="true"></i>
+
+            <p></p>
+        </div>
+        <!--        </div>-->
+        <!--
+<div class="px test"></div>
+<div class="rem test"></div>
 -->
         <br>
         <br>

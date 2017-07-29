@@ -1,6 +1,7 @@
 $(function() {
 
 
+
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
     //            SUPPORT OBJECTS AND VARIABLES
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -55,6 +56,63 @@ $(function() {
     }
 
 
+    function showingHelpBox () {
+
+        // showing helpBox after clicking on the help icon
+        $("#helpIcon").on("click", function () {
+            $(".helpBox").addClass("animated").removeClass("backAnimated");
+            
+
+            //        if($(".helpBox").hasClass("animated")) {
+            //            $(".helpBox").removeClass("animated").addClass("backAnimated");
+            //        } else {
+            //      $(".helpBox").addClass("animated").removeClass("backAnimated");
+            //        }
+        });
+
+
+        
+        $(".helpBoxExitBtn").on("mouseenter mouseleave", function() {
+            $(this).toggleClass("hoverBtn");
+        });
+
+
+        
+        // hiding helpBox after clicking on the exit button
+        $(".helpBoxExitBtn").on("click", function() { 
+            $(".helpBox").addClass("backAnimated").removeClass("animated");
+        });
+
+    }
+
+
+
+    showingHelpBox();
+
+
+
+    //        $(".helpBox").prepend("<i class='fa fa-times exitBtn' aria-hidden='true''></i>");
+    //        if $(".helpBox:animated") 
+    //        $(".helpBox p").text("vfdhgfbnhfx fgnjfgbfdz njfxgcbnxfg");
+    /*
+    $("#helpIcon").on("click", function() {
+
+            $(".helpBoxContainer").show().animate({opacity:1,top:"169px",left:"222px"},500);
+    });
+    */
+
+
+    /*   $("#helpIcon").on("click", function() {
+        $(".helpBoxContainer").toggle(300, function() {
+            $(".helpBox").show(500, {queue: false}); 
+
+            $(".helpBoxContainer").animate({top: "169px", left: "222px"}, 500, {queue: false});
+        });
+    });
+*/
+
+
+
 
     // **********************************************************
     // searching the POSITION of the FIRST DAY of a current month
@@ -81,7 +139,7 @@ $(function() {
     // BUILDING a calendar 
     // **********************************************************
 
-    function makingCalendar (currentDay, currentMonth, currentYear) {
+    function makingCalendar (currentMonth, currentYear) {
 
 
         // finding the number of days of a current month
@@ -117,14 +175,21 @@ $(function() {
                 numberCell.text(dayOfMnth).appendTo(calendarCell);
                 numberCell.after("<p class='dropArea' id='" + i*100 + "'></p>");
 
-                // painting the current day's cell
-                if (dayOfMnth == currentDay) {
-                    calendarCell.addClass("today");
-                }
 
                 if (calendarCell.index() == 6) {
                     calendarCell.addClass("sunday");
                 }
+
+
+                // painting the current day's cell
+                if (dayOfMnth == day) {
+                    if (currentMonth == month) {
+                        if (currentYear == year) {
+                            calendarCell.addClass("today");
+                        }
+                    }
+                }
+
 
                 dayOfMnth ++;
             }
@@ -143,7 +208,7 @@ $(function() {
 
     function dragAndDrop() {
 
-        $("div.icon").draggable({
+        $(".activitiesContainer div.icon").draggable({
             helper: "clone"
         });
 
@@ -152,10 +217,10 @@ $(function() {
                 var activity = $(ui.draggable).data("activity");
                 var dropBox = $(this).find(".dropArea").attr("id");
                 var iconClone = $('<div class="icon icon-clone" data-activity="' + activity + '"></div>');
-                var inputBox = $('<input type="text" placeholder="Add description" class="' + activity + '"/>');
+                var inputBox = $('<input type="text" placeholder="Add description" maxlength="41"/>');
                 var tooltipBox = $('<span class="tooltip"></span>');
 
-                
+
                 if ($(this).find(".dropArea").children().length < 6) {
                     $("#" + dropBox).append(iconClone);
                     iconClone.append(inputBox).append(tooltipBox);
@@ -335,8 +400,6 @@ $(function() {
         // deleting an icon
         $(".infoBox ul").find("li").on("click", ".deleteButton", function() {
 
-            console.log($(".deleteButton").closest(".infoBox").length);
-
             // deleting an icon from infoBox
             $(this).parent().remove();
 
@@ -382,7 +445,7 @@ $(function() {
             $(this).toggleClass("hoverBtn");
         });
 
-        //  //closing infoBox by clicking on "x"
+        // closing infoBox by clicking on "x"
         $(".exitBtn").on("click", function() {
             $(".infoBox").css("display", "none");
         });
@@ -392,13 +455,12 @@ $(function() {
             if ($(".infoBox").is(":visible")) {
 
                 // except infoBox
-                if($(e.target).hasClass("infoBox")) {
+                if($(e.target).hasClass("infoBox") || $(e.target).hasClass("deleteButton")) {
                     return;
                 }
 
                 // and except the descendants of calendar and infoBox
                 if($(e.target).closest(".calendarBox").length || $(e.target).closest(".infoBox").length) {
-                    console.log("widzi mnie");
                     return; 
                 }
 
@@ -415,7 +477,6 @@ $(function() {
     // **********************************************************
 
     $(".arrow-right").on("click", function () {
-
 
         // searching the position of 1st day of next month
         firstDayOfMnthPosition = $("#" + (firstDayOfMnthPosition + numberOfDays)).index() + 1;
@@ -440,7 +501,7 @@ $(function() {
 
         removingMonth();
 
-        makingCalendar(0, nextMnth, nextMnthYear);
+        makingCalendar(nextMnth, nextMnthYear);
 
     });
 
@@ -498,7 +559,7 @@ $(function() {
 
         beginingOfMonth(numberOfDaysInPrevMnth, lastDayOfPrevMnthName);
 
-        makingCalendar(0, prevMnth, prevMnthYear);
+        makingCalendar(prevMnth, prevMnthYear);
 
     });
 
@@ -537,12 +598,12 @@ $(function() {
             dataType: 'json'
 
         }).done(function(response){                    
-            var month = response.monthName;
-            var day = response.day;
-            var year = response.year;
-            var dayName = response.dayofweekName;
+            month = response.monthName;
+            day = response.day;
+            year = response.year;
+            dayName = response.dayofweekName;
             beginingOfMonth(day, dayName);
-            makingCalendar(day, month, year);
+            makingCalendar(month, year);
         }).fail(function(error) {
             console.log(error);
         });
