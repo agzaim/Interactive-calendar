@@ -8,8 +8,8 @@
         <link rel="shortcut icon" href="images/favicon.ico"> 
         <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
         <script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
-        <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
         <script src="js/app2.js"></script>
+        <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
         <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
@@ -19,7 +19,7 @@
     <body>
 
         <header>
-            <div class="headerPiece"><div class="icon" id="helpIcon">?</div>
+            <div class="headerPiece"><div class="icon helpIcon">?<span class="tooltip">Instructional video</span></div>
             </div>
             <div class="headerPiece">
                 <h1>Forget-<span>me</span>-not</h1>
@@ -136,7 +136,7 @@
             </li>
             <li class="smallContainer">
                 <div class="icon" data-activity="friendMeeting"></div>
-                <span>Friend Meeting</span>
+                <span>Going out</span>
             </li>
             <li class="smallContainer">
                 <div class="icon" data-activity="dentist"></div>
@@ -177,17 +177,25 @@
             <ul>
             </ul>
         </div>
-        <!--        <div class="helpBoxContainer">-->
         <div class="helpBox">
             <i class="fa fa-times helpBoxExitBtn" aria-hidden="true"></i>
-
-            <p></p>
-        </div>
-        <!--        </div>-->
-        <!--
-<div class="px test"></div>
-<div class="rem test"></div>
+<!--
+            <video width="420" height="340" autoplay>
+  <source src="videos/MOV_0006.mp4" type="video/mp4"/>
+  <source src="movie.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
 -->
+        </div>
+       <!-- <div class="gif">
+        <video width="420" height="340" autoplay>
+  <source src="videos/MOV_0006.mp4" type="video/mp4"/>
+  <source src="movie.ogg" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+        </div>-->
+        
+        <div id="overlay"></div>
         <br>
         <br>
         <br>

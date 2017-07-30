@@ -47,6 +47,9 @@ $(function() {
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 
+    $(".helpIcon").addClass("helpBtnAnimated");
+
+
 
     if (localStorage.getItem("json") == null) {
         var json = [
@@ -56,44 +59,57 @@ $(function() {
     }
 
 
+    // **********************************************************
+    // showing and hiding the HELP BOX 
+    // **********************************************************
+
     function showingHelpBox () {
 
         // showing helpBox after clicking on the help icon
-        $("#helpIcon").on("click", function () {
-            $(".helpBox").addClass("animated").removeClass("backAnimated");
-            
+        $(".helpIcon").on("click", function () {
+            $(this).removeClass("helpBtnAnimated");
 
-            //        if($(".helpBox").hasClass("animated")) {
-            //            $(".helpBox").removeClass("animated").addClass("backAnimated");
-            //        } else {
-            //      $(".helpBox").addClass("animated").removeClass("backAnimated");
-            //        }
+            $('#overlay').fadeIn(500);
+            $(".helpBox").addClass("animated").removeClass("backAnimated").css("background-image", "url('../images/instruction.gif?x=" + Math.round(Math.random()*1000) + "')");
         });
 
 
-        
+        // adding some magic to exit button on hover
         $(".helpBoxExitBtn").on("mouseenter mouseleave", function() {
             $(this).toggleClass("hoverBtn");
         });
 
 
-        
         // hiding helpBox after clicking on the exit button
         $(".helpBoxExitBtn").on("click", function() { 
             $(".helpBox").addClass("backAnimated").removeClass("animated");
+            //            css("background-image", "url('../images/nail.png')");
+            $("#overlay").fadeOut(500);
         });
 
-    }
 
+        // hiding helpBox by clicking somewhere on the page
+        $("body").on("click", function(e) {    
+            if ($(".helpBox").hasClass("animated")) {
+
+                // except infoBox
+                if($(e.target).hasClass("helpBox") || $(e.target).hasClass("helpIcon")) {
+                    console.log("jestem chroniony");
+                    return;
+                }
+
+                $(".helpBox").addClass("backAnimated").removeClass("animated");
+                //            css("background-image", "url('../images/nail.png')");
+                $("#overlay").fadeOut(500);
+            }
+        })
+    }
 
 
     showingHelpBox();
 
 
 
-    //        $(".helpBox").prepend("<i class='fa fa-times exitBtn' aria-hidden='true''></i>");
-    //        if $(".helpBox:animated") 
-    //        $(".helpBox p").text("vfdhgfbnhfx fgnjfgbfdz njfxgcbnxfg");
     /*
     $("#helpIcon").on("click", function() {
 

@@ -28,7 +28,8 @@
 
 .weekNames {
     font-family: "Roboto", sans-serif;
-    background-color: #FF9009;
+    background-color: $logo-color;
+    color: #404040;
     width: 96px;
     height: 27px;
     letter-spacing: 2px;
@@ -47,21 +48,18 @@
     width: 96px;
     height: 96px;
     box-shadow: -2px -2px $border-color;
-    //    color: #595959;
-    //    color: $text-color;
     display: inline-block;
     margin-right: 6px;
     margin-top: 6px;
     &:last-child {
-        color: #DE1B1B;
-        background-color:  #ffffb3;
+        background-color: #F8F4A6;
     }
     &:empty {
         background-color: #e0e0d1;
     }
     &:hover {
         cursor: pointer;
-        background-color: $lighter-green;
+        background-color: #CBE896;
     }
     &:empty:hover {
         background-color: #e0e0d1;
@@ -71,7 +69,6 @@
 
 
 p.dayNumber {
-    //    font-family: "Roboto", sans-serif;
     font-size: 27px;
     font-weight: bold;
     text-align: right;
@@ -89,13 +86,16 @@ p.dropArea {
 }
 
 
+.sunday {
+    color: #DE1B1B;
+}
+
 
 div.today, .infoBox h2.today {
-    /*                box-shadow: 3px 3px grey inset;*/
-    /*                background-color: #009900;*/
-    color: #009900;
+    color: #008000;
     text-shadow: 0.8px 0.8px #c2c2a3;
 }
+
 
 .infoBox h2.sunday {
     color: #DE1B1B;

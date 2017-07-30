@@ -14,7 +14,7 @@ header {
     margin-bottom: 50px;
     box-shadow: 0 4px 5px #c2c2a3;
     h1 {
-        margin-top: 14px;     
+        margin-top: 20px;     
         text-align: center;
         font-weight: 300;
         font-size: 44px;
@@ -23,8 +23,7 @@ header {
         letter-spacing: 1px;
         text-shadow: 2px 2px #404040;
         span {
-            color: #FF9009;
-            //            font-weight: 800;
+            color: $logo-color;
             font-family: 'Alfa Slab One', cursive;
             letter-spacing: 2px;
         }
@@ -33,7 +32,8 @@ header {
         font-size: 10px;
         float: right;
         margin-right: 14px;
-        margin-top: 66px; 
+        margin-top: 66px;
+        letter-spacing: 0.7px;
     }
     a {
         text-decoration: none;
@@ -52,35 +52,5 @@ header {
 }
 
 
-div[data-activity="cleaning"]  {
-    background-image: url(../images/clear.png);
-    display: block;
-    position: absolute;
-    top: 119px;
-    left: 19px;
-    font-size: 13px;
-    cursor: pointer;
-    &:hover .tooltip {
-        display: inline-block;
-        opacity: 1;
-        left: 36px;
-        top: 1px;
-        letter-spacing: 1.2px;
-        width: 152px;
-        height: 23px;
-        padding: 3px 0;
-    }
-}
 
-#helpIcon {
-    font-weight: 800;
-    margin-left: 19px;
-    margin-top: 63px; 
-    color: #FFF;
-    border-color: #FFF;
-    text-align: center;
-    padding-top: 2px;
-    &:hover {
-        cursor: pointer;
-    }
-}
+

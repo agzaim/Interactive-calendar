@@ -7,16 +7,7 @@
 */
 
 
-.icon-clone {
-    position: relative;
-    &:hover .tooltip {
-        opacity: 1;
-        display: inline-block;
-    }
-    &:hover .tooltip:empty {
-        display: none;
-    }
-}
+
 
 
 input {
@@ -30,23 +21,6 @@ input {
     }
 }
 
-
-.tooltip {
-    width: 130px;
-    background-color: #fff;
-    border: 1px solid $border-color;
-    color: $text-color;
-    font-weight: bold;
-    text-align: center;
-    padding: 2px 0;
-    border-radius: 5px;
-    position: absolute;
-    left: 30px;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 1s;
-    display: none;
-}
 
 
 /*// nie wiem po co to*/

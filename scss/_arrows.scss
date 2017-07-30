@@ -13,11 +13,13 @@
     font-size: 70px;
     font-weight: bold;
     color: $header-color;
+//    color: #1A1423;
     margin-top: 300px;
     //    text-shadow: 2px 2px 3px #c2c2a3;
     text-shadow: 2px 2px $border-color;
     &:hover {
-        color: $lighter-green;
+//        color: $logo-color;
+        color: #ff6666;
         cursor: pointer;
     } 
 }
