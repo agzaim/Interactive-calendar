@@ -46,8 +46,11 @@ $(function() {
     //                     FUNCTIONS
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+    if(!localStorage.getItem('videoDisplay')){
+        $(".helpIcon").addClass("helpBtnAnimated");
+    }
 
-    $(".helpIcon").addClass("helpBtnAnimated");
+//    $(".helpIcon").find("span").addClass("helpBtnAnimatedSpan");
 
 
 
@@ -65,8 +68,15 @@ $(function() {
 
     function showingHelpBox () {
 
+        $(".helpIcon").on("mouseover", function () {
+            $(this).removeClass("helpBtnAnimated");
+        });
+
+        
         // showing helpBox after clicking on the help icon
         $(".helpIcon").on("click", function () {
+            localStorage.setItem('videoDisplay',true);
+            
             $(this).removeClass("helpBtnAnimated");
 
             $('#overlay').fadeIn(500);

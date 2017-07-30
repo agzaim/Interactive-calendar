@@ -126,12 +126,22 @@ body {
 }
 
 
+$scale-factor: 1.5;
+
+
 @keyframes lighting {
     100% {
         background-color: $logo-color;
         color: #000;
         border-color: #000;
-        transform: scale(1.5);
+        transform: scale($scale-factor);
+    }
+}
+
+
+@keyframes tooltipStopGrowing {
+    100% {
+        transform: scale(1/$scale-factor);
     }
 }
 
@@ -152,25 +162,19 @@ body {
 }
 
 
-
-/*.gif {
-//    background-image: url("../images/dog.gif");
-//    background-position: center;
-//    background-repeat: no-repeat;
-//    background-size: 70%;
-     width: 873px;
-    height: 470px;
-    border: 1px solid red;
-
-}*/
-
-//$transform-scale: 1.5;
-
 .helpBtnAnimated {
     animation-name: lighting;
     animation-duration: 2s;
     animation-iteration-count: 3;
     animation-delay: 1.5s;
     animation-timing-function: ease-out;
+}
 
+
+.helpBtnAnimatedSpan {
+    animation-name: tooltipStopGrowing;
+    animation-duration: 2s;
+    animation-iteration-count: 3;
+    animation-delay: 1.5s;
+    animation-timing-function: ease-out;
 }
