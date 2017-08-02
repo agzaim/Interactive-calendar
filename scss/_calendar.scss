@@ -9,20 +9,43 @@
     color: $text-color;
     float: left;
     display: inline-block;
-    margin-left: 67px;
-    margin-right: 60px;
+   /* margin-left: 67px;
+    margin-right: 60px;*/
+    
+    margin-left: 5vw;
+    margin-right: 4.3vw;
+    
+    width: 54vw;
+    height: 54vw;
 }
 
 
 .mthsName {
     font-size: 34px;
     letter-spacing: 4px;
-    height: 38px;
-    margin-bottom: 23px;
+    
+    /*height: 38px;
+    margin-bottom: 23px;*/
+    
+    height: 5.2%;
+    margin-bottom: 3.15%;
     text-align: center;
     margin-top: 0;
     font-weight: 900;
     font-family: 'Alfa Slab One', sans-serif;
+}
+
+.weekRow {
+//    width: 100%;
+    height: 13%;
+    margin-top: 0.78%;
+}
+
+
+.weekNamesRow {
+    height: 3.7%;
+    margin-bottom: 1.56%;
+
 }
 
 
@@ -30,27 +53,45 @@
     font-family: "Roboto", sans-serif;
     background-color: $logo-color;
     color: #404040;
-    width: 96px;
-    height: 27px;
+    
+    /*width: 96px;
+    height: 27px;*/
+    
+    width: 13%;
+    height: 100%;
     letter-spacing: 2px;
     box-shadow: -2px -2px $border-color;
     display: inline-block;
-    margin-right: 6px;
-    margin-bottom: 6px;
+    
+   /* margin-right: 6px;
+    margin-bottom: 6px;*/
+    
+    margin-right: 0.78%;
+//    margin-top: 0.78%;
     text-align: center;
-    padding-top: 3.9px;
+//    padding-top: 3.9px;
+    padding-top: 0.49%;
     font-weight: 900;
 }
 
 
 .dayBox {
     vertical-align: top;
-    width: 96px;
-    height: 96px;
+    
+   /* width: 96px;
+    height: 96px;*/
+    
+    width: 13%;
+    height: 100%;
     box-shadow: -2px -2px $border-color;
     display: inline-block;
+/*    
     margin-right: 6px;
-    margin-top: 6px;
+    margin-top: 6px;*/
+    
+    margin-right: 0.78%;
+//    margin-top: 0.78%;
+        
     &:last-child {
         background-color: #F8F4A6;
     }
@@ -72,17 +113,28 @@ p.dayNumber {
     font-size: 27px;
     font-weight: bold;
     text-align: right;
-    padding-right: 14px;
+   /* padding-right: 14px;
     padding-top: 5px;
     height: 42px;
-    width: 94px;
+    width: 94px;*/
+    
+    padding-right: 14%;
+    padding-top: 6%;
+    height: 44%;
+    width: 100%;
 }
 
 
 p.dropArea {
-    height: 47px;
+    /*height: 47px;
     width: 94px;
     padding-left: 4px;
+    */
+    
+    height: 49%;
+    width: 100%;
+    padding-left: 4%;
+   
 }
 
 

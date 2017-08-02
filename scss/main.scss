@@ -53,27 +53,27 @@ body {
     opacity: 0;
     width: 0;
     height: 0;
-    
+
     /*display: none;
-        width: 873px;
-        height: 470px;*/
-    
+    width: 873px;
+    height: 470px;*/
+
     box-shadow: 4px 4px 6px #c2c2a3;
     border: 1px solid $border-color;
     position: absolute;
     top: 77px;
     left: 45px;
     z-index: 12;
-    
-        /*opacity: 1;
-        top: 169px;
-        left: 222px;*/
-    
+
+    /*opacity: 1;
+    top: 169px;
+    left: 222px;*/
+
     background-color: #FFF;
 
     //    transition: width 1s, height 1s;
-//    background-image: url("../images/6a00d83451b26169e201a3fd13933f970b-pi.jpg");
-//    background-image: url("../images/instruction.gif");
+    //    background-image: url("../images/6a00d83451b26169e201a3fd13933f970b-pi.jpg");
+    //    background-image: url("../images/instruction.gif");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 90%;
@@ -130,24 +130,29 @@ $scale-factor: 1.5;
 
 
 @keyframes lighting {
+    40% {
+        color: #404040;
+        border-color: #404040;
+    }
+
     100% {
         background-color: $logo-color;
-        color: #000;
-        border-color: #000;
+        border-color: #404040;
+        color: #404040;
         transform: scale($scale-factor);
     }
 }
 
 
-@keyframes tooltipStopGrowing {
-    100% {
-        transform: scale(1/$scale-factor);
-    }
+/*@keyframes tooltipStopGrowing {
+100% {
+transform: scale(1/$scale-factor);
 }
+}*/
 
 
 .animated {
-//        background-image: url("../images/instruction.gif");
+    //        background-image: url("../images/instruction.gif");
 
     animation-name: movingForward;
     animation-duration: 2s;
@@ -171,10 +176,10 @@ $scale-factor: 1.5;
 }
 
 
-.helpBtnAnimatedSpan {
-    animation-name: tooltipStopGrowing;
-    animation-duration: 2s;
-    animation-iteration-count: 3;
-    animation-delay: 1.5s;
-    animation-timing-function: ease-out;
-}
+/*.helpBtnAnimatedSpan {
+animation-name: tooltipStopGrowing;
+animation-duration: 2s;
+animation-iteration-count: 3;
+animation-delay: 1.5s;
+animation-timing-function: ease-out;
+}*/

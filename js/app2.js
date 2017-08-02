@@ -46,12 +46,9 @@ $(function() {
     //                     FUNCTIONS
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-    if(!localStorage.getItem('videoDisplay')){
+    if(!localStorage.getItem("videoDisplay")) {
         $(".helpIcon").addClass("helpBtnAnimated");
     }
-
-//    $(".helpIcon").find("span").addClass("helpBtnAnimatedSpan");
-
 
 
     if (localStorage.getItem("json") == null) {
@@ -68,15 +65,20 @@ $(function() {
 
     function showingHelpBox () {
 
+        // stopping growing animation 
         $(".helpIcon").on("mouseover", function () {
             $(this).removeClass("helpBtnAnimated");
         });
+        
 
         
         // showing helpBox after clicking on the help icon
         $(".helpIcon").on("click", function () {
-            localStorage.setItem('videoDisplay',true);
             
+            // sending info to localStorage that video was watched
+            localStorage.setItem("videoDisplay", true);
+            
+            // stopping growing animation 
             $(this).removeClass("helpBtnAnimated");
 
             $('#overlay').fadeIn(500);
@@ -93,7 +95,6 @@ $(function() {
         // hiding helpBox after clicking on the exit button
         $(".helpBoxExitBtn").on("click", function() { 
             $(".helpBox").addClass("backAnimated").removeClass("animated");
-            //            css("background-image", "url('../images/nail.png')");
             $("#overlay").fadeOut(500);
         });
 
@@ -260,7 +261,7 @@ $(function() {
                         inputBox.css("display", "none");
                         tooltipBox.text(inputBox.val());
 
-                        // setting data to localStorage
+                        // setting data in localStorage
                         var event = {
                             eventMonthAndYear: $(".mthsName").text(),
                             boxId: dropBox,

@@ -1,7 +1,7 @@
 {
   "name": "paczka",
   "version": "1.0.0",
-  "description": "> Pamiętaj, żeby oddzielać ćwiczenia komentarzami i pisać czytelny, dobrze sformatowany kod.",
+  "description": "> Usefull interactive calendar.",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
