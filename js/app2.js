@@ -46,6 +46,18 @@ $(function() {
     //                     FUNCTIONS
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+    
+    for (var i = 0; i < 5; i++) {
+        if (i > 0) {
+        $(".loaderIcon").eq(i-1).removeClass("loadingAnimation");
+        }
+        
+        console.log( $(".loaderIcon").eq(i));
+        $(".loaderIcon").eq(i).addClass("loadingAnimation");
+    }
+    
+    
+    
     if(!localStorage.getItem("videoDisplay")) {
         $(".helpIcon").addClass("helpBtnAnimated");
     }
