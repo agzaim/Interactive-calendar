@@ -10,9 +10,13 @@
     font-family: "Raleway", sans-serif;
     float: right;
     display: inline-block;
-    width: 300px;
+    border: 1px solid red;
+  /*  width: 300px;
     padding-left: 60px;
-    padding-top: 60px;
+    padding-top: 60px; */
+    width: 21vw;
+    padding-left: 3.7vw;
+    padding-top: 4.4vw;
     font-size: 16px;
     list-style: none;
     letter-spacing: 1.5px;
@@ -25,10 +29,12 @@
 
 
 .smallContainer {
-    margin-bottom: 15px;
+//    margin-bottom: 15px;
+    margin-bottom: 1.2vw;
     span {
         vertical-align: middle;
-        margin-left: 19px;
+//        margin-left: 19px;
+        margin-left: 1.3vw;
     }
 }
 

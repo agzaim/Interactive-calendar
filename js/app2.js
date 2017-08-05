@@ -1,5 +1,5 @@
-$(function() {
 
+$(function() {
 
 
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -46,22 +46,33 @@ $(function() {
     //                     FUNCTIONS
     // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
+
+
+
+    // **********************************************************
+    // LOADER animation 
+    // **********************************************************
     
-    for (var i = 0; i < 5; i++) {
-        if (i > 0) {
-        $(".loaderIcon").eq(i-1).removeClass("loadingAnimation");
-        }
-        
-        console.log( $(".loaderIcon").eq(i));
-        $(".loaderIcon").eq(i).addClass("loadingAnimation");
+    /*for (var i = 0; i < 5; i++) {
+        $(".loaderIcon").eq(i).css("animation-delay", i + "s").addClass("loadingAnimation");
     }
     
     
+    $("#reloadMessage").delay(5000).fadeIn(500);
+
+    */
+    // **********************************************************
+    // HELP BUTTON animation 
+    // **********************************************************
     
     if(!localStorage.getItem("videoDisplay")) {
         $(".helpIcon").addClass("helpBtnAnimated");
     }
 
+    
+    // **********************************************************
+    // getting data from LOCAL STORAGE
+    // **********************************************************
 
     if (localStorage.getItem("json") == null) {
         var json = [
@@ -81,15 +92,15 @@ $(function() {
         $(".helpIcon").on("mouseover", function () {
             $(this).removeClass("helpBtnAnimated");
         });
-        
 
-        
+
+
         // showing helpBox after clicking on the help icon
         $(".helpIcon").on("click", function () {
-            
+
             // sending info to localStorage that video was watched
             localStorage.setItem("videoDisplay", true);
-            
+
             // stopping growing animation 
             $(this).removeClass("helpBtnAnimated");
 
@@ -237,6 +248,10 @@ $(function() {
 
         dragAndDrop();  
         archivedActivities();
+        
+        
+        // closing LOADING PAGE
+        $("#loadingBoard").css("display", "none");
 
     }
 
@@ -295,7 +310,6 @@ $(function() {
     // **********************************************************
 
     function archivedActivities() {
-
         //        console.log(JSON.stringify(json));
         $.each(json, function(index, value) {
 
@@ -649,8 +663,7 @@ $(function() {
     }
 
 
-    loadCalendar();
-
+//    loadCalendar();
 
 });
 

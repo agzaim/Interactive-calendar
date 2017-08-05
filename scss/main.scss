@@ -199,7 +199,7 @@ animation-timing-function: ease-out;
 //    background: #FFF;
     opacity: 0.96;
     z-index: 6;
-//    display: none;
+    display: none;
 }
 
 
@@ -207,6 +207,13 @@ animation-timing-function: ease-out;
     position: absolute;
     top: 49vh;
     left: 42vw;
+    p {
+//        padding: auto 0;
+    margin-top: 5%;
+        margin-left: 27%;
+        font-weight: 800;
+        letter-spacing: 3px;
+    }
 }
 
 
@@ -215,8 +222,6 @@ animation-timing-function: ease-out;
 
     100% {
         background-color: #ffff99;
-//        border-color: #404040;
-//        color: #404040;
         transform: scale(1.2);
         box-shadow: 2px 2px 2px 2px #ffff99;
     }
@@ -225,7 +230,29 @@ animation-timing-function: ease-out;
 
 .loadingAnimation {
     animation-name: loading;
-    animation-duration: 1.5s;
-    animation-delay: 1s;
+    animation-duration: 1s;
 }
 
+
+#reloadMessage {
+    display: none;
+    height: 23vh;
+    width: 30vw;
+//    border: 2px double $header-color;
+    color: $header-color;
+    border-width: 6px;
+    border-style: double;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    position: absolute;
+    top: 45vh;
+    left: 34vw;
+    z-index: 4;
+    background-image: url("../images/p6.png");
+    p {
+        text-align: center;
+        margin-top: 7vh;
+        line-height: 25px; 
+    }
+}
