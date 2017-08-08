@@ -1,8 +1,11 @@
 
 .icon {
-    height: 26px;
-    width: 26px;
-    border: 1.4px solid $text-color;
+    /* height: 26px;
+    width: 26px;*/
+    height: 1.9vw;
+    width: 1.9vw;
+//    border: 1.4px solid $text-color;
+    border: 0.109vw solid $text-color;
     display: inline-block;
     background-position: center;
     background-repeat: no-repeat;
@@ -20,14 +23,13 @@
     border-color: #FFF;
     text-align: center;
     padding-top: 2px;
-        cursor: pointer;
+    cursor: pointer;
     position: relative;
     &:hover .tooltip {
         display: inline-block;
         opacity: 1;
-//        left: 36px;
         top: 1px;
-            margin-left: 3px;
+        margin-left: 3px;
         letter-spacing: 1.2px;
         width: 145px;
         height: 23px;
@@ -72,40 +74,50 @@ div[data-activity="cleaning"]  {
 
 
 .infoBoxIcon {
-    height: 30px;
+    /*height: 30px;
     width: 30px;
-    margin-right: 8px;
+    margin-right: 8px;*/
+    height: 2.05vw;
+    width: 2.05vw;
+    margin-right: 0.58vw;
 }
 
 
 
 .infoBox i {
-        color: $buttons-color;
-        margin-right: 6px;
-        height: 20px;
-        width: 20px;
-        &.exitBtn {
-            position: absolute;
-            top: 15px;
-            right: 13px;
-            margin: 0;
-        }
-        &.hoverBtn {
-            color: #000;
-            cursor: pointer;
-        }
-        &.editBtnActive {
-            color: #009900;
-        }
+    color: $buttons-color;
+    /* margin-right: 6px;
+    height: 20px;
+    width: 20px;*/
+    height: 1.458vw;
+    width: 1.458vw;
+    margin-right: 0.43vw;
+    &.exitBtn {
+        position: absolute;
+        /* top: 15px;
+        right: 13px;*/
+        top: 1.2vw;
+        right: 1vw;
+        margin: 0;
+    }
+    &.hoverBtn {
+        color: #000;
+        cursor: pointer;
+    }
+    &.editBtnActive {
+        color: #009900;
+    }
 } 
 
 
 .loaderBox .icon {
     height: 2.5vw;
     width: 2.5vw;
-    border-width: 1.5px; 
+//    border-width: 1.5px;
+    border-width: 0.11vw;
     border-color: #333333;
-    margin-right: 4px;
+//    margin-right: 4px;
+    margin-right: 0.29vw;
 }
 
 

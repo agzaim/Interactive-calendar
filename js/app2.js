@@ -58,9 +58,9 @@ $(function() {
     }
     
     
-    $("#reloadMessage").delay(5000).fadeIn(500);
+    $("#reloadMessage").delay(5000).fadeIn(500);*/
 
-    */
+    
     // **********************************************************
     // HELP BUTTON animation 
     // **********************************************************
@@ -133,7 +133,6 @@ $(function() {
                 }
 
                 $(".helpBox").addClass("backAnimated").removeClass("animated");
-                //            css("background-image", "url('../images/nail.png')");
                 $("#overlay").fadeOut(500);
             }
         })
@@ -663,7 +662,7 @@ $(function() {
     }
 
 
-//    loadCalendar();
+    loadCalendar();
 
 });
 

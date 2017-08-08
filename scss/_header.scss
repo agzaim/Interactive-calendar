@@ -20,18 +20,22 @@ header {
         margin-top: 3vh;
         text-align: center;
         font-weight: 300;
-        font-size: 44px;
+//        font-size: 44px;
+        font-size: 6.6vh;
         font-family: 'Alfa Slab One', cursive;
-        letter-spacing: 1px;
+//        letter-spacing: 1px;
+        letter-spacing: 0.15vh;
         text-shadow: 2px 2px #404040;
         span {
             color: $logo-color;
             font-family: 'Alfa Slab One', cursive;
-            letter-spacing: 2px;
+//            letter-spacing: 2px;
+            letter-spacing: 0.3vh;
         }
     }
     p {
-        font-size: 10px;
+//        font-size: 10px;
+        font-size: 1.5vh;
         float: right;
        /* margin-right: 14px;
         margin-top: 66px;*/
@@ -39,6 +43,7 @@ header {
         margin-top: 9.9vh;
 //        margin-bottom: 
         letter-spacing: 0.7px;
+        line-height: 1.9vh;
     }
     a {
         text-decoration: none;
