@@ -53,12 +53,12 @@ $(function() {
     // LOADER animation 
     // **********************************************************
     
-    /*for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
         $(".loaderIcon").eq(i).css("animation-delay", i + "s").addClass("loadingAnimation");
     }
     
     
-    $("#reloadMessage").delay(5000).fadeIn(500);*/
+    $("#reloadMessage").delay(5000).fadeIn(500);
 
     
     // **********************************************************
