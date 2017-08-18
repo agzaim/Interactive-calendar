@@ -1,11 +1,13 @@
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+---------------ICONS AND TOOLTIPS---------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
 
 .icon {
-    /* height: 26px;
-    width: 26px;*/
-    height: 1.9vw;
-    width: 1.9vw;
-//    border: 1.4px solid $text-color;
-    border: 0.109vw solid $text-color;
+    height: 26px;
+    width: 26px;
+    border: 1.4px solid $text-color;
     display: inline-block;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,6 +62,15 @@ div[data-activity="cleaning"]  {
     }
 }
 
+@media (min-width: 1824px) {
+    div[data-activity="cleaning"]  {
+        top: 149px;
+    }
+    .helpIcon {
+    margin-top: 85px; 
+    }
+}
+
 
 .icon-clone {
     position: relative;
@@ -74,30 +85,22 @@ div[data-activity="cleaning"]  {
 
 
 .infoBoxIcon {
-    /*height: 30px;
+    height: 30px;
     width: 30px;
-    margin-right: 8px;*/
-    height: 2.05vw;
-    width: 2.05vw;
-    margin-right: 0.58vw;
+    margin-right: 8px;
 }
 
 
 
 .infoBox i {
     color: $buttons-color;
-    /* margin-right: 6px;
+    margin-right: 6px;
     height: 20px;
-    width: 20px;*/
-    height: 1.458vw;
-    width: 1.458vw;
-    margin-right: 0.43vw;
+    width: 20px;
     &.exitBtn {
         position: absolute;
-        /* top: 15px;
-        right: 13px;*/
-        top: 1.2vw;
-        right: 1vw;
+        top: 15px;
+        right: 13px;
         margin: 0;
     }
     &.hoverBtn {
@@ -111,13 +114,14 @@ div[data-activity="cleaning"]  {
 
 
 .loaderBox .icon {
-    height: 2.5vw;
-    width: 2.5vw;
-//    border-width: 1.5px;
-    border-width: 0.11vw;
+    height: 34px;
+    width: 34px;
+    border-width: 1.5px;
     border-color: #333333;
-//    margin-right: 4px;
-    margin-right: 0.29vw;
+    margin-right: 4px;
+    &:last-child {
+        margin-right: 0;
+    }
 }
 
 

@@ -15,61 +15,86 @@
     height: 140%;
     opacity: 0.96;
     z-index: 6;
-//    display: none;
+    display:none;
 }
 
 
 .loaderBox {
-    position: absolute;
-    top: 49vh;
-    left: 42vw;
+    width: 300px;
+    margin: 0 auto;
+    margin-top: 350px;
     p {
-    margin-top: 5.5%;
-        margin-left: 27%;
+        margin-top: 16px;
         font-weight: 800;
         letter-spacing: 3px;
-        font-size: 2.3vh;
+        font-size: 17px;
+        text-align: center;
     }
 }
 
 
+.loaderIconsContainer {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19 */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
 
-@keyframes loading {
+
+@mixin loading() {
     100% {
         background-color: #ffff99;
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
         transform: scale(1.2);
         box-shadow: 2px 2px 2px 2px #ffff99;
     }
 }
 
 
+@-webkit-keyframes loading { @include loading(); }
+@-moz-keyframes loading { @include loading(); }
+@-o-keyframes loading { @include loading(); }
+@keyframes loading { @include loading(); }
+
+
 .loadingAnimation {
+    -webkit-animation-name: loading;
+    -moz-animation-name: loading;
+    -o-animation-name: loading;   
     animation-name: loading;
+    -webkit-animation-duration: 1s;
+    -moz-animation-duration: 1s;
+    -o-animation-duration: 1s;  
     animation-duration: 1s;
 }
 
 
 #reloadMessage {
     display: none;
-    height: 23vh;
-    width: 30vw;
+    height: 150px;
+    width: 350px;
     color: $header-color;
-//    border-width: 6px;
-    border-width: 0.45vw;
+    border-width: 6px;
     border-style: double;
-//    font-size: 18px;
-    font-size: 2.9vh;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: 1.5px;
     position: absolute;
-    top: 45vh;
-    left: 34vw;
+    bottom: 0;
+    left: 495px;
     z-index: 4;
     background-image: url("../images/p6.png");
     p {
         text-align: center;
-        margin-top: 7vh;
-        line-height: 3.8vh; 
-//        line-height: 25px; 
+        margin: 0;
+        padding-top: 48px;
     }
 }
+

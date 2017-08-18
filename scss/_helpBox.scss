@@ -1,0 +1,240 @@
+
+/*  
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+------------------HELP BOX----------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& 
+*/
+
+
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140%;
+    background: #000;
+    opacity: 0.6;
+    z-index: 6;
+    display: none;
+}
+
+
+.helpBox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    box-shadow: 4px 4px 6px #c2c2a3;
+    border: 1px solid $border-color;
+    position: absolute;
+    top: 77px;
+    left: 45px;
+    z-index: 12;
+    background-color: #FFF;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    .helpBoxExitBtn {
+        color: $buttons-color;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        top: 15px;
+        right: 13px;
+        margin: 0;
+        &.hoverBtn {
+            color: #000;
+            cursor: pointer;
+        }
+    }
+}
+
+
+@mixin movingForward() {
+    0% {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    30% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+        width: 890px;
+        height: 500px;
+        transform: translate(160px, 60px);
+        -webkit-transform: translate(160px, 60px);
+        -ms-transform: translate(160px, 60px);
+    }
+}
+
+
+@-webkit-keyframes movingForward { @include movingForward(); }
+@-moz-keyframes movingForward { @include movingForward(); }
+@-o-keyframes movingForward { @include movingForward(); }
+@keyframes movingForward { @include movingForward(); }
+
+
+@mixin movingBackground() {
+    0% {
+        transform: translate(160px, 60px);
+        -webkit-transform: translate(160px, 60px);
+        -ms-transform: translate(160px, 60px);
+        opacity: 1;
+        width: 890px;
+        height: 500px;
+    }
+    100% {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+}
+
+
+@-webkit-keyframes movingBackground { @include movingBackground(); }
+@-moz-keyframes movingBackground { @include movingBackground(); }
+@-o-keyframes movingBackground { @include movingBackground(); }
+@keyframes movingBackground { @include movingBackground(); }
+
+
+@mixin lighting() {
+     40% {
+        color: #404040;
+        border-color: #404040;
+    }
+    100% {
+        background-color: $logo-color;
+        border-color: #404040;
+        color: #404040;
+        transform: scale(1.5);
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+    }
+}
+
+
+@-webkit-keyframes lighting { @include lighting(); }
+@-moz-keyframes lighting { @include lighting(); }
+@-o-keyframes lighting { @include lighting(); }
+@keyframes lighting { @include lighting(); }
+
+
+.animated {
+    -webkit-animation-name: movingForward;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: movingForward;
+    -moz-animation-duration: 2s;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-name: movingForward;
+    -o-animation-duration: 2s;
+    -o-animation-fill-mode: forwards;
+    animation-name: movingForward;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+
+.backAnimated {
+    -webkit-animation-name: movingBackground;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-name: movingBackground;
+    -moz-animation-duration: 1s;
+    -moz-animation-fill-mode: forwards;
+    -o-animation-name: movingBackground;
+    -o-animation-duration: 1s;
+    -o-animation-fill-mode: forwards;
+    animation-name: movingBackground;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+
+.helpBtnAnimated {
+    -webkit-animation-name: lighting;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: 3;
+    -webkit-animation-delay: 1.5s;
+    -webkit-animation-timing-function: ease-out;
+    -moz-animation-name: lighting;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: 3;
+    -moz-animation-delay: 1.5s;
+    -moz-animation-timing-function: ease-out;
+    -o-animation-name: lighting;
+    -o-animation-duration: 2s;
+    -o-animation-iteration-count: 3;
+    -o-animation-delay: 1.5s;
+    -o-animation-timing-function: ease-out;
+    animation-name: lighting;
+    animation-duration: 2s;
+    animation-iteration-count: 3;
+    animation-delay: 1.5s;
+    animation-timing-function: ease-out;
+}
+
+
+@media (min-width: 1824px) {
+    .helpBox {
+        top: 98px;
+    }
+    @keyframes movingForward {
+        100% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @-webkit-keyframes movingForward {
+         100% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @-moz-keyframes movingForward {
+         100% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+     @-o-keyframes movingForward {
+         100% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @keyframes movingBackground {
+        0% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @-webkit-keyframes movingBackground {
+        0% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @-moz-keyframes movingBackground {
+        0% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+    @-o-keyframes movingBackground {
+        0% {
+            transform: translate(400px, 300px);
+            -webkit-transform: translate(400px, 300px);
+            -o-transform: translate(400px, 300px);
+        }
+    }
+}

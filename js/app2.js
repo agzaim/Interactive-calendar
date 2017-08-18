@@ -94,7 +94,6 @@ $(function() {
         });
 
 
-
         // showing helpBox after clicking on the help icon
         $(".helpIcon").on("click", function () {
 
@@ -104,8 +103,9 @@ $(function() {
             // stopping growing animation 
             $(this).removeClass("helpBtnAnimated");
 
-            $('#overlay').fadeIn(500);
-            $(".helpBox").addClass("animated").removeClass("backAnimated").css("background-image", "url('../images/instruction.gif?x=" + Math.round(Math.random()*1000) + "')");
+            $("#overlay").fadeIn(500);
+            $(".helpBox").addClass("animated").removeClass("backAnimated").css("background-image", "url('./images/instruction.gif?x=" + Math.round(Math.random()*1000) + "')");
+            
         });
 
 
@@ -128,7 +128,6 @@ $(function() {
 
                 // except infoBox
                 if($(e.target).hasClass("helpBox") || $(e.target).hasClass("helpIcon")) {
-                    console.log("jestem chroniony");
                     return;
                 }
 
@@ -140,27 +139,6 @@ $(function() {
 
 
     showingHelpBox();
-
-
-
-    /*
-    $("#helpIcon").on("click", function() {
-
-            $(".helpBoxContainer").show().animate({opacity:1,top:"169px",left:"222px"},500);
-    });
-    */
-
-
-    /*   $("#helpIcon").on("click", function() {
-        $(".helpBoxContainer").toggle(300, function() {
-            $(".helpBox").show(500, {queue: false}); 
-
-            $(".helpBoxContainer").animate({top: "169px", left: "222px"}, 500, {queue: false});
-        });
-    });
-*/
-
-
 
 
     // **********************************************************
@@ -309,7 +287,6 @@ $(function() {
     // **********************************************************
 
     function archivedActivities() {
-        //        console.log(JSON.stringify(json));
         $.each(json, function(index, value) {
 
             if (value.eventMonthAndYear == $(".mthsName").text()) {
@@ -407,7 +384,7 @@ $(function() {
                 // changing description in tooltip
                 var newDescription = $(this).prev().text();
                 var editingIcon = $(this).siblings("div.icon").data("activity");
-                var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 228
+                var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line (about) 322
 
                 $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
                     if ($(this).data("activity") == editingIcon) {
@@ -458,7 +435,7 @@ $(function() {
             // deleting an icon from dayBox in calendar 
             var deletedActivityDescription = $(this).parent().find("span").text();
             var deletingIcon = $(this).siblings("div.icon").data("activity");
-            var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line 228
+            var dayBoxId = $(".infoBox").find("h2").data("id"); // in relation to line (about) 322
             $("#" + dayBoxId).find(".dropArea").children(".icon").each(function(index, value) {
                 if ($(this).data("activity") == deletingIcon) {
                     if ($(this).find("span").text() == deletedActivityDescription) {
