@@ -29,6 +29,8 @@
     position: absolute;
     top: 77px;
     left: 45px;
+//    top: 25vh;
+//    left: 33.3vw;
     z-index: 12;
     background-color: #FFF;
     background-position: center;
@@ -61,11 +63,16 @@
     }
     100% {
         opacity: 1;
-        width: 890px;
-        height: 500px;
-        transform: translate(160px, 60px);
+     /*   width: 890px;
+        height: 500px;*/
+        width: 60vw;
+        height: 70vh;
+      /*  transform: translate(160px, 60px);
         -webkit-transform: translate(160px, 60px);
-        -ms-transform: translate(160px, 60px);
+        -ms-transform: translate(160px, 60px);  */
+        transform: translate(15vw, 7vh);
+        -webkit-transform: translate(15vw, 7vh);
+        -ms-transform: translate(15vw, 7vh);
     }
 }
 
@@ -78,9 +85,9 @@
 
 @mixin movingBackground() {
     0% {
-        transform: translate(160px, 60px);
-        -webkit-transform: translate(160px, 60px);
-        -ms-transform: translate(160px, 60px);
+        transform: translate(15vw, 7vh);
+        -webkit-transform: translate(15vw, 7vh);
+        -ms-transform: translate(15vw, 7vh);
         opacity: 1;
         width: 890px;
         height: 500px;
@@ -181,7 +188,7 @@
     .helpBox {
         top: 98px;
     }
-    @keyframes movingForward {
+  /*  @keyframes movingForward {
         100% {
             transform: translate(400px, 300px);
             -webkit-transform: translate(400px, 300px);
@@ -236,5 +243,5 @@
             -webkit-transform: translate(400px, 300px);
             -o-transform: translate(400px, 300px);
         }
-    }
+    }*/
 }
